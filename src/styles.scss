@@ -1,0 +1,56 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import './variables';
+@import './mixins';
+
+/* --- General --- */
+html, body {
+  font-family: $primary-font;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+/* --- Toasts --- */
+.toast-success {
+  color: $main-text-color;
+  background: $success-color;
+}
+
+.toast-error {
+  color: $main-text-color;
+  background: $error-color;
+}
+
+/* --- Light badges --- */
+.badge-standard-light {
+  @include badge-light();
+}
+
+.badge-success-light {
+  @include badge-light($main-very-light-color, $badge-success-color);
+}
+
+.badge-error-light {
+  @include badge-light($main-very-light-color, $error-color);
+}
+
+/* --- Badges --- */
+.badge-success {
+  @include badge($success-color, $main-text-color);
+}
+
+.badge-error {
+  @include badge($error-color, $main-text-color);
+}
+
+.badge-primary-accent {
+  @include badge($primary-accent-color, $main-very-light-color);
+}
+
+.badge-secondary-accent {
+  @include badge($secondary-accent-color, $main-text-color);
+}
