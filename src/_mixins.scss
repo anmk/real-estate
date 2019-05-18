@@ -1,0 +1,109 @@
+@import './variables';
+
+/* --- Devices --- */
+$small-phone-width: 361px;
+$phone-width: 600px;
+$tablet-width: 960px;
+$small-desktop-width: 1280px;
+$large-desktop-width: 1920px;
+
+@mixin small-phone {
+  @media (max-width: #{$small-phone-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin only-phone {
+  @media (min-width: #{$small-phone-width}) and (max-width: #{$phone-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin only-tablet {
+  @media (min-width: #{$phone-width}) and (max-width: #{$tablet-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin only-small-desktop {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$small-desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin only-large-desktop {
+    @media (min-width: #{$small-desktop-width}) and (max-width: #{$large-desktop-width - 1px}) {
+      @content;
+    }
+  }
+
+@mixin up-large-desktop {
+  @media (min-width: #{$large-desktop-width}) {
+    @content;
+  }
+}
+
+@mixin phone {
+  @media (max-width: #{$phone-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$small-desktop-width}) {
+    @content;
+  }
+}
+
+/* --- Roundings --- */
+@mixin border-radius-mix($radius: 50%) {
+  border-radius: $radius;
+}
+
+/* --- Transitions --- */
+@mixin transition($length: 0.3s) {
+  transition: all $length ease-in-out;
+}
+
+/* --- Transforms --- */
+@mixin vertical-align() {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* --- Badges --- */
+@mixin badge($background: $main-accent-color, $color: $main-very-light-color) {
+  font-family: $secondary-font;
+  font-size: $primary-font-size;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  background-color: $background;
+  color: $color;
+  padding: 3px;
+  border: 1px solid $main-text-color;
+  @include border-radius-mix(5px);
+}
+
+@mixin badge-light($background: $main-very-light-color, $color: $main-text-color) {
+  font-family: $secondary-font;
+  font-size: $primary-font-size;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  background-color: $background;
+  color: $color;
+  padding: 3px;
+  border: 1px solid $main-text-color;
+  @include border-radius-mix(5px);
+}
+
+/* --- Boxes --- */
+@mixin info-box($box-width: 30%) {
+  font-size: $main-font-size;
+  border: 2px solid $main-color;
+  background-color: $light-background-color;
+  width: $box-width;
+  @include border-radius-mix(5px);
+  position: absolute;
+  padding-left: .2rem;
+}
