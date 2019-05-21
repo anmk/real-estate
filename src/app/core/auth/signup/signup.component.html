@@ -1,0 +1,52 @@
+<section fxLayout="column" fxLayoutAlign="center center">
+  <h1>Please signup!</h1>
+  <form [formGroup]="signupForm" 
+    fxLayout="column" 
+    fxLayoutAlign="center center" 
+    (ngSubmit)="onSubmit()">
+    
+    <mat-form-field hintLabel="Enter e-mail">
+      <input 
+        type="email" 
+        matInput 
+        placeholder="Your email"
+        name="email" 
+        email 
+        required 
+        formControlName="email">
+      <mat-error 
+        *ngIf="signupForm.hasError('required')">
+          Field must not be empty.
+      </mat-error>
+      <mat-error 
+        *ngIf="!signupForm.hasError('required')">
+          E-Mail is invalid.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input 
+        type="password" 
+        matInput 
+        placeholder="password"
+        name="password"
+        required
+        minlength="8"
+        formControlName="password">
+      <mat-hint align="end">
+        {{signupForm.value?.password.length}}/8
+      </mat-hint>
+      <mat-error>
+        Must have at least 8 characters.
+      </mat-error>
+    </mat-form-field>
+
+    <button 
+      type="submit" 
+      mat-raised-button 
+      color="primary">
+      Submit
+    </button>
+
+  </form>
+</section>
