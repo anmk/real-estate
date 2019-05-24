@@ -1,0 +1,26 @@
+<mat-nav-list>
+  <a mat-list-item routerLink="/" (click)="onCloseSidenav()">
+    <mat-icon>home</mat-icon>
+    <span class="nav-space">Home</span>
+  </a>
+  <a mat-list-item routerLink="/premises" (click)="onCloseSidenav()">
+    <mat-icon>weekend</mat-icon>
+    <span class="nav-space">Premises</span>
+  </a>
+  <a *ngIf="isAuth" mat-list-item routerLink="/dashboard" (click)="onCloseSidenav()">
+    <mat-icon>keyboard</mat-icon>
+    <span class="nav-space">Dashboard</span>
+  </a>
+  <a *ngIf="!isAuth" mat-list-item routerLink="/signup" (click)="onCloseSidenav()">
+    <mat-icon>face</mat-icon>
+    <span class="nav-space">Signup</span>
+  </a>
+  <a *ngIf="!isAuth" mat-list-item routerLink="/login" (click)="onCloseSidenav()">
+    <mat-icon>input</mat-icon>
+    <span class="nav-space">Login</span>
+  </a>
+  <a *ngIf="isAuth" mat-list-item routerLink="/" (click)="onLogout()">
+    <mat-icon>settings_power</mat-icon>
+    <span class="nav-space">Logout</span>
+  </a>
+</mat-nav-list>
