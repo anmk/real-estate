@@ -1,0 +1,9 @@
+<section>
+  <div class="premises-container">
+    <div class="premises-element"
+      *ngFor="let premise of premises$ | async"
+      (click)="showDetails(premise)">
+      <app-premises-card [premise]="premise"></app-premises-card>
+    </div>
+  </div>
+</section>
