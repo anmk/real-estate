@@ -1,0 +1,91 @@
+@import '../../../variables';
+@import '../../../mixins';
+
+:host {
+  cursor: pointer;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 80%;
+    top: 2%;
+    z-index: 1;
+    mat-icon {
+      font-size: 40px;
+      color: lightgrey;
+    }
+  }
+
+  mat-card-title, mat-card-subtitle, mat-card-content {
+    padding: 0;
+    margin: .2rem;
+  }
+  
+  mat-card {
+    padding: .3rem;
+    margin: .3rem;
+  }
+  
+  mat-card-footer {
+    margin-top: .4rem;
+  }
+  
+  .card-size {
+    height: 17rem;
+    width: 17rem;
+  }
+
+  .card-size-img {
+    width: 100%;
+    height: 12rem;
+    border: 1px solid $main-text-color;
+  }
+
+  .mat-card-title {
+    font-size: $title-card-font-size;
+  }
+
+  .mat-card-subtitle {
+    font-size: $subtitle-card-font-size;
+  }
+
+  .description {
+    padding: 2px;
+  }
+
+  .card-info {
+    margin-left: 1rem;
+  }
+
+  .badge-success-light, .badge-error-light, .badge-standard-light {
+    font-size: $badge-card-font-size;
+  }
+
+  @include small-phone {
+    .card-size {
+      height: 13.5rem;
+      width: 12.5rem;
+    }
+    .mat-card-title {
+      font-size: 1.1rem;
+    }
+    .mat-card-subtitle {
+      font-size: .7rem;
+    }
+    .card-size-img {
+      width: 100%;
+      height: 9rem;
+    }
+    .badge-success-light {
+      font-size: .6rem;
+    }
+    .badge-error-light {
+      font-size: .6rem;
+    }
+    .badge-standard-light {
+      display: none;
+    }
+  }

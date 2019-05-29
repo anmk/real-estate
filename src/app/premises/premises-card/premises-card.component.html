@@ -1,0 +1,38 @@
+<mat-card *ngIf="premise" class="card-size">
+  <mat-card-title-group>
+    <div class="icon-container"><mat-icon fxLayoutAlign="right">location_city</mat-icon></div>
+    <mat-card-title fxLayoutAlign="left">{{ premise?.city }}</mat-card-title>
+    <mat-card-subtitle fxLayoutAlign="left">{{ premise?.street }}</mat-card-subtitle>
+  </mat-card-title-group>
+
+  <mat-card-content fxLayoutAlign="center">
+    <img mat-card-lg-image
+      *ngIf="premise"
+      [attr.src]="premise.thumbnailUrl"
+      alt="{{ premise?.city }} - {{ premise?.street }}"
+      class="card-size-img">
+  </mat-card-content>
+  
+  <mat-card-footer>
+    <div class="card-info">
+      <span *ngIf="premise?.rented" class="description">
+        <span class="badge-error-light">rented</span>
+      </span>
+      <span *ngIf="!premise?.rented" class="description">
+        <span class="badge-success-light">not rented</span>
+      </span>
+      <span *ngIf="premise?.fornished" class="description">
+        <span class="badge-success-light">fornished</span>
+      </span>
+      <span *ngIf="!premise?.fornished" class="description">
+        <span class="badge-error-light">not fornished</span>
+      </span>
+      <span *ngIf="premise?.area"  class="description">
+        <span class="badge-standard-light">{{premise?.area}}m<sup>2</sup></span>
+      </span>
+      <span *ngIf="premise?.premises"  class="description">
+        <span class="badge-standard-light">{{premise?.premises}}</span>
+      </span>
+    </div>
+  </mat-card-footer>
+</mat-card>
