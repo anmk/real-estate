@@ -1,0 +1,107 @@
+@import '../../../variables';
+@import '../../../mixins';
+
+.no-info {
+  width: 170px;
+  position: absolute;
+  margin: auto;
+  padding: 2px;
+  z-index: 0;
+}
+
+.more-info {
+  position: absolute;
+  margin: auto;
+  z-index: 1;
+}
+
+.photo {
+  z-index: 2;
+}
+
+.info-box {
+  border: 2px solid $main-text-color;
+  font-size: $main-font-size;
+  @include border-radius-mix(5px);
+}
+
+.scrool-window {
+  overflow: auto;
+  background-color: $light-background-color;
+  color: $main-text-color;
+  padding: 10px;
+}
+
+.details-container {
+  margin: 1rem;
+}
+
+@include small-phone {
+  mat-card {
+    min-height: 17rem;
+  }
+  .more-info {
+    top: 5rem;
+  }
+  .scrool-window {
+    height: 70px;
+    width: 160px;
+  }
+  .no-info {
+    top: 7rem;
+  }
+}
+
+@include only-phone {
+  mat-card {
+    min-height: 21rem;
+  }
+  .scrool-window {
+    height: 90px;
+    width: 180px;
+  }
+  .no-info {
+    top: 9rem;
+  }
+}
+
+@include only-tablet {
+  mat-card {
+    min-height: 32rem;
+  }
+  .scrool-window {
+    height: 180px;
+    width: 380px;
+  }
+}
+
+@include only-small-desktop {
+  mat-card {
+    height: 31rem;
+    width: 40rem;
+  }
+  .scrool-window {
+    height: 180px;
+    width: 380px;
+  }
+}
+
+@include only-large-desktop {
+  mat-card {
+    height: 37rem;
+  }
+  .scrool-window {
+    height: 220px;
+    width: 420px;
+  }
+}
+
+@include up-large-desktop {
+  mat-card {
+    height: 40rem;
+  }
+  .scrool-window {
+    height: 220px;
+    width: 420px;
+  }
+}

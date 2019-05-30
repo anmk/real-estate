@@ -1,0 +1,39 @@
+<section class="premises-details">
+  <div 
+    fxLayout="row" 
+    fxLayout.lt-md="column" 
+    fxLayoutAlign="center stretch" 
+    fxLayoutGap="20px"
+    class="details-container">
+      
+    <mat-card fxFlex="96%" fxLayoutAlign="center center">
+      <mat-card-content fxLayoutAlign="center center">
+        <div class="photo">
+          <router-outlet></router-outlet>
+        </div>
+
+        <div class="no-info info-box">
+          Unfortunately, no additional information has been entered for this location.
+        </div>
+        
+        <div class="more-info">
+          <div *ngIf="premises$ | async as premises">
+            <div *ngIf="premises.additionalInformations">
+              <div class="info-box scrool-window"> 
+                <h1>More information</h1>
+                <p>{{ premises?.additionalInformations }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card fxFlex="96%" fxLayout="column" fxLayoutAlign="center center" class="cart-size">
+      <router-outlet name="list" class="cart-size"></router-outlet>
+    </mat-card>
+
+  </div>
+</section>
+
+
