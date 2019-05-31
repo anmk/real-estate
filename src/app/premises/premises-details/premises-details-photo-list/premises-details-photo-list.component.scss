@@ -1,0 +1,136 @@
+@import '../../../../variables';
+@import '../../../../mixins';
+
+mat-card-title, mat-card-subtitle, mat-card-actions {
+  margin: .2rem 0;
+}
+
+.details-min {
+  width: 90%;
+  height: 90%;
+  border: 1px solid $light-text-color;
+}
+
+.photo-list-container {
+  margin: 0 .3rem 0 .8rem;
+}
+
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.box>* {
+  flex: 0 0 20%;
+  cursor: pointer;
+}
+
+.basic-description {
+  font-family: $primary-font;
+  font-size: $main-font-size;
+  padding: 0;
+}
+
+.inner-description {
+  padding-right: .5rem;
+}
+
+.address-description {
+  @extend .basic-description;
+  margin-top: .1rem;
+}
+
+.address-data {
+  line-height: 1.2rem;
+}
+
+.premises-description {
+  @extend .basic-description;
+  margin: 1rem 0 0 0;
+}
+
+.check-box-description {
+  @extend .basic-description;
+  margin-top: 0;
+}
+
+.area-description {
+  @extend .basic-description;
+  margin: 0;
+}
+
+.address {
+  margin: 0 0 2px 0;
+  padding: 0;
+}
+
+.badge-box {
+  margin-bottom: .5rem;
+  padding: 0;
+}
+
+.check-box {
+  color: $error-color;
+}
+
+.check-box-outline-blank {
+  color: $success-color;
+}
+
+@include small-phone {
+  .box {
+    width: 220px;
+  }
+  .box>* {
+      flex: 0 0 50%;
+  }
+  .badge-secondary-accent {
+    border: 1px solid $secondary-accent-color;
+  }
+  button {
+    width: 96%;
+  }
+}
+
+@include only-phone {
+  .box {
+    width: 320px;
+  }
+  .box>* {
+      flex: 0 0 33.33333333%;
+  }
+  .badge-secondary-accent {
+    border: 1px solid $secondary-accent-color;
+  }
+  button {
+    width: 96%;
+  }
+}
+
+@include only-tablet {
+  .box {
+    width: 540px;
+  }
+}
+
+@include only-small-desktop {
+  .box {
+    width: 400px;
+  }
+}
+
+@include only-large-desktop {
+  .box {
+    width: 600px;
+  }
+}
+
+@include up-large-desktop {
+  .box {
+    width: 800px;
+  }
+  .box>* {
+      flex: 0 0 12.5%;
+  }
+}
