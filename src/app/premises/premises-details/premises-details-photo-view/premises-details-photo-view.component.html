@@ -1,0 +1,12 @@
+<ng-container>
+  <div class="outer-img">
+    <img *ngIf="image"
+      [attr.src]="image.url"
+      class="details-img"
+      width="100%"
+      height="100%">
+  </div>
+  <mat-card-actions *ngIf="image" fxLayoutAlign.xs="center center">
+    <button mat-button routerLink="../../">... Show more info</button>
+  </mat-card-actions>
+</ng-container>

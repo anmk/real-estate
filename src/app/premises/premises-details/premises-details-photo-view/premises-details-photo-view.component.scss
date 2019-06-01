@@ -1,0 +1,63 @@
+@import '../../../../variables';
+@import '../../../../mixins';
+
+.details-img {
+  width: 100%;
+  height: 100%;
+  border: 2px solid $light-text-color;
+  margin-left: -.1rem;
+}
+
+@include small-phone {
+  .outer-img {
+    width: 13rem;
+    height: 9.75rem;
+    padding: .5rem;
+  }
+  button {
+    width: 90%;
+  }
+}
+
+@include only-phone {
+  .outer-img {
+    width: 18rem;
+    height: 13.5rem;
+    padding: .5rem;
+  }
+  button {
+    width: 18rem;
+  }
+}
+
+@include only-tablet {
+  .outer-img {
+    width: 32rem;
+    height: 24rem;
+    padding: .5rem;
+  }
+}
+
+@include only-small-desktop {
+  .outer-img {
+    width: 25rem;
+    height: 18.75rem;
+    padding: .5rem;
+  }
+}
+
+@include only-large-desktop {
+  .outer-img {
+    width: 32rem;
+    height: 24rem;
+    padding: .5rem;
+  }
+}
+
+@include up-large-desktop {
+  .outer-img {
+    width: 44rem;
+    height: 33rem;
+    padding: .5rem;
+  }
+}
