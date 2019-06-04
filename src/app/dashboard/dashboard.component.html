@@ -1,0 +1,75 @@
+<mat-tab-group>
+  <mat-tab label="New premises">
+    <app-premises-info
+      [hint]="'Add a new place.'">
+    </app-premises-info>
+    <app-premises-form
+      (shownPremisesForm)="onShownPremisesForm($event)">
+    </app-premises-form>
+    <div *ngIf="premisesForm.valid" class="thumbnail-info">
+      <span>To create a premises you need to add a thumbnail.</span>
+    </div>
+    <app-file-upload 
+      [premisesIdToPhoto]="premisesIdToPhoto" 
+      (uploadStatus)="onStatus($event)"
+      [premisesForm]="premisesForm.valid">
+    </app-file-upload>
+    <div fxLayoutAlign="center center">
+      <button 
+        mat-raised-button 
+        color="primary"
+        [disabled]="premisesForm?.invalid || !addPhotosActive"
+        (click)="createPremises()"
+        routerLink="/premises">
+        Create Premises
+      </button>
+    </div>
+    <div class="bottom">
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Add photos">
+    <app-premises-info
+      [hint]="'Choose the place you want to add photos to.'">
+    </app-premises-info>
+    <app-premises-select 
+      (sharedPremisesId)="onSharedPremisesId($event)">
+    </app-premises-select>
+    <div *ngIf="premisesIdToPhoto" class="confirmed-info">
+      <span>You confirmed this: "{{ premisesIdToPhoto }}" premises id. 
+        Now you can send a photo to the cloud.</span>
+    </div>
+    <div class="odstep-">
+    <app-file-upload
+      [premisesIdToPhoto]="premisesIdToPhoto" 
+      (uploadStatus)="onStatus($event)">
+    </app-file-upload>
+  </div>
+    <div *ngIf="addPhotosActive && premisesIdToPhoto" class="chosen-premises-info">
+      <span>Now you can add the sent photo to the application.</span>
+    </div>
+    <div fxLayoutAlign="center center"> 
+      <button mat-raised-button
+        color="primary"
+        [disabled]="!addPhotosActive || !premisesIdToPhoto"
+        (click)="createPhotoLink()"
+        routerLink="/premises">
+        Add Photo
+      </button>
+    </div>
+    <div class="bottom">
+    </div>
+  </mat-tab>
+  
+  <mat-tab label="Edit premises">
+    <app-premises-info
+      [hint]="'Choose the place you want to edit.'">
+    </app-premises-info>
+  </mat-tab>
+
+  <mat-tab label="Delete premises">
+    <app-premises-info
+      [hint]="'Choose the place you want to delete.'">
+    </app-premises-info>
+  </mat-tab>
+</mat-tab-group>

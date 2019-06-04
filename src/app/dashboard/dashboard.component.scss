@@ -1,0 +1,45 @@
+@import '../../variables';
+@import '../../mixins';
+
+button {
+  width: 10rem;
+}
+
+.chosen-premises-info {
+  @include info-box();
+  right: 1rem;
+}
+
+.confirmed-info {
+  @include info-box();
+  left: 1rem;
+  transform: translateY(-9.5rem);
+}
+
+.thumbnail-info {
+  @include info-box();
+  right: 1rem;
+  transform: translateY(10rem);
+}
+
+.bottom {
+  margin-bottom: 2rem;
+}
+
+@include phone {
+  .local-info-basis {
+    @include info-box(80%);
+    left: 9%;
+  }
+  .confirmed-info {
+    display: none;
+  }
+  .chosen-premises-info {
+    @extend .local-info-basis;
+    transform: translateY(-4rem);
+  }
+  .thumbnail-info {
+    @extend .local-info-basis;
+    transform: translateY(8.5rem);
+  }
+}
