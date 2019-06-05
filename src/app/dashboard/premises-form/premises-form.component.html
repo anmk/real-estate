@@ -1,0 +1,127 @@
+<section class="premises-form">
+  <form [formGroup]="premisesForm">
+    <mat-grid-list #grid rowHeight="8:1">
+
+      <div fxLayoutAlign="center center" fxLayoutGap="20px">
+        <mat-grid-tile fxLayout="column" fxLayoutAlign="center center">
+          <mat-form-field fxFlex.xs="96%" fxFlex.gt-xs="400px">
+            <mat-select formControlName="premises" placeholder="Choose the kind of premises.">
+              <mat-option *ngFor="let premise of premisesType$ | async" [value]="premise.value">
+                {{premise.viewValue}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premisesForm.get('premises').hasError('required')">
+              This field is required.
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile fxLayout="column" fxLayoutAlign="center center">
+          <mat-form-field fxFlex.xs="96%" fxFlex.gt-xs="400px">
+            <mat-select formControlName="country" placeholder="Choose the country.">
+              <mat-option *ngFor="let country of countriesType$ | async" [value]="country.value">
+                {{country.value}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="premisesForm.get('country').hasError('required')">
+              This field is required.
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+      </div>
+
+      <div fxLayoutAlign="center center" fxLayoutGap="20px">
+        <mat-grid-tile>
+          <mat-form-field fxFlex.xs="96%" fxFlex.gt-xs="400px">
+            <input matInput formControlName="city" placeholder="City">
+            <mat-error *ngIf="premisesForm.get('city').hasError('required')">
+              This field is required.
+            </mat-error>
+            <mat-error *ngIf="premisesForm.get('city').getError('minlength') as error">
+              This field can have a minimum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-form-field fxFlex.xs="96%" fxFlex.gt-xs="400px">
+            <input matInput formControlName="street" placeholder="Street">
+            <mat-error *ngIf="premisesForm.get('street').hasError('required')">
+              This field is required.
+            </mat-error>
+            <mat-error *ngIf="premisesForm.get('street').getError('minlength') as error">
+              This field can have a minimum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+      </div>
+
+      <div fxLayoutAlign="center center" fxLayoutGap="20px">
+        <mat-grid-tile>
+          <mat-form-field fxFlex.xs="96%" fxFlex.gt-xs="400px">
+            <input matInput formControlName="streetNumber" placeholder="Street number">
+            <mat-error *ngIf="premisesForm.get('streetNumber').hasError('required')">
+              This field is required.
+            </mat-error>
+            <mat-error *ngIf="premisesForm.get('streetNumber').getError('pattern') as error">
+              This field can contain up to five characters. Only numbers and letters.
+              Now has: {{ error.actualValue.length }}
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-form-field fxFlex.xs="96%" fxFlex.gt-xs="400px">
+            <input matInput formControlName="flat" placeholder="Flat">
+            <mat-error *ngIf="premisesForm.get('flat').getError('pattern') as error">
+              This field can have up to four characters.
+              Now has: {{ error.actualValue.length }}
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+      </div>
+
+      <div fxLayoutAlign="center center" fxLayoutGap="20px">
+        <mat-grid-tile>
+          <mat-form-field fxFlex.xs="96%" fxFlex.gt-xs="400px">
+            <input matInput formControlName="area" placeholder="Area [m2]">
+            <mat-error *ngIf="premisesForm.get('area').getError('pattern') as error">
+              This field can have up to four digits. It can not contain letters.
+              Now has: {{ error.actualValue.length }} characters: "{{ error.actualValue }}"
+            </mat-error>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile fxLayout="column" fxLayoutAlign="center center">
+          <mat-form-field fxFlex.xs="96%" fxFlex.gt-xs="400px">
+            <mat-select formControlName="heating" placeholder="Heating">
+              <mat-option *ngFor="let heating of heatingsType$ | async" [value]="heating.value">
+                {{heating.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+      </div>
+
+      <div fxLayoutAlign="center center" fxLayoutGap="20px">
+        <mat-grid-tile>
+          <div fxFlex.xs="96%" fxFlex.gt-xs="400px" fxLayoutGap="20px">
+            <mat-slide-toggle formControlName="fornished">Fornished</mat-slide-toggle>
+            <mat-slide-toggle formControlName="rented">Rented</mat-slide-toggle>
+          </div>
+        </mat-grid-tile>
+      </div>
+    </mat-grid-list>
+
+    <div fxLayoutAlign="center center" fxLayoutGap="20px">
+      <mat-form-field fxFlex.lt-md="96%" fxFlex.gt-sm="800px">
+        <textarea matInput formControlName="additionalInformations" placeholder="Additional informations">
+        </textarea>
+        <mat-error *ngIf="premisesForm.get('additionalInformations').getError('maxlength') as error">
+          The text area can have a maximum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+  </form>
+</section>

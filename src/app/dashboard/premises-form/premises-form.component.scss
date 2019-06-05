@@ -1,0 +1,13 @@
+@import '../../../variables';
+
+textarea {
+  min-height: 8rem;
+}
+
+.mat-grid-list {
+  padding-top: 3rem;
+}
+
+.mat-form-field, mat-slide-toggle {
+  font-size: $main-font-size;
+}
