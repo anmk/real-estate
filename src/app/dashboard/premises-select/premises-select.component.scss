@@ -1,0 +1,111 @@
+@import '../../../variables';
+@import '../../../mixins';
+
+button {
+  width: 10rem;
+}
+
+.photo-container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.basic-element {
+  height: 35px;
+  padding: 0 15px;
+  border-color: $light-text-color;
+}
+
+.header-element {
+  @extend .basic-element;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  font-size: $title-font-size;
+}
+
+.container-element {
+  @extend .basic-element;
+  border-bottom: 1px solid;
+  font-size: $main-font-size;
+}
+
+.city-element, .street-element {
+  flex: 4;  
+}
+
+.street-number-element {
+  flex: 1.2;
+}
+
+.selected-element {
+  flex: .8;  
+}
+
+.inner-element {
+  color: $main-text-color;
+  @include vertical-align();
+}
+
+.info-circle {
+  font-size: $main-font-size;
+  background-color: $light-background-color;
+  margin: 1rem auto;
+  width: 2rem;
+  height: 2rem;
+  @include border-radius-mix();
+}
+
+.info-circle-outline {
+  border: 2px solid $main-color;
+}
+
+.chosen-premises-info {
+  @include info-box();
+  right: 1rem;
+}
+
+.more-info {
+  @include info-box();
+  right: 1rem;
+  padding-left: .1rem;
+  transform: translateY(-6.5rem);
+}
+
+.info-button {
+  margin-bottom: 1rem;
+}
+
+.bottom {
+  margin-bottom: 1rem;
+}
+
+@include phone {
+  .chosen-premises-info {
+    display: none;
+  }
+  .more-info {
+    @include info-box(90%);
+    left: 5%;
+  }
+}
+
+@include small-phone {
+  .city-element {
+    display: none;
+  }
+  .more-info {
+    transform: translateY(-7rem);
+  }
+}
+
+@include only-phone {
+  .city-element {
+    flex: 4;  
+  }
+  .more-info {
+    transform: translateY(-6.5rem);
+  }
+}
+
+

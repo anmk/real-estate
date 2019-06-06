@@ -1,0 +1,98 @@
+<section>
+  <div class="photo-container">
+    <div class="header-element city-element">
+      <div class="inner-element">
+        City
+      </div>
+    </div>
+    <div class="header-element street-element">
+      <div class="inner-element">
+        Street
+      </div>
+    </div>
+    <div class="header-element street-number-element">
+      <div class="inner-element">
+        Street Number
+      </div>
+    </div>
+    <div class="header-element selected-element">
+    </div>
+  </div>
+
+  <form #formRef="ngForm" (ngSubmit)="sharePremisesId(formRef.value)">
+    <div *ngFor="let premise of premises$ | async" class="photo-container">
+      <ng-container>
+        <div class="container-element city-element"> 
+            <div class="inner-element">
+              {{premise.city}} 
+            </div>
+        </div>
+      </ng-container>
+      <ng-container >
+        <div class="container-element street-element">
+          <div class="inner-element">
+            {{premise.street}}
+          </div>
+        </div>
+      </ng-container>
+      <ng-container>
+        <div class="container-element street-number-element">
+          <div class="inner-element">
+            {{premise.streetNumber}}
+          </div>
+        </div>
+      </ng-container>
+      <ng-container>
+        <div class="container-element selected-element">
+          <mat-radio-group required [(ngModel)]="chosenPremises" #formRef="ngModel" name="chosenPremises">
+            <mat-radio-button class="md-primary inner-element" [value]="premise.id">
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </ng-container>
+    </div>
+    
+    <div class="bottom">
+    </div>
+
+    <div *ngIf="chosenPremises" class="chosen-premises-info">
+      Chosen premises Id: "{{ chosenPremises }}"
+    </div>
+
+    <div fxLayoutAlign="center center">
+      <button mat-raised-button 
+        type="submit"
+        color="primary"
+        [disabled]="formRef?.invalid">
+        Confirm
+      </button>
+    </div>
+  </form>
+
+  <div>
+    <div fxLayoutAlign="center center" [ngClass]="{'info-circle-outline': chosenPremises}" class="info-circle">
+      <p>or</p>
+    </div>
+
+    <div fxLayoutAlign="center center" class="info-button">
+      <button mat-raised-button 
+        color="primary"
+        [disabled]="formRef?.invalid"
+        (click)="confirmationSelectedPremises()">
+        Show more info
+      </button>
+    </div>
+    
+    <div *ngIf="premisesData" class="more-info">
+      <table>
+          <tr><td>
+            Address: {{ premisesData?.streetNumber }}/{{ premisesData?.flat }} 
+            {{ premisesData?.street }}, {{ premisesData?.city }}, {{ premisesData?.country }}
+          </td></tr>
+          <tr><td>
+            Premises type:&nbsp;{{ premisesData?.premises }}
+          </td></tr>
+        </table>
+    </div>
+  </div>
+</section>
