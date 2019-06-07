@@ -1,0 +1,72 @@
+@import '../../../variables';
+@import '../../../mixins';
+
+.dropzone { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; 
+  font-weight: 200;
+  height: 300px;
+  border: 2px dashed $main-color;
+  border-radius: 5px;
+  background: $clear-color;
+  margin: 10px 2px 10px 2px;
+  &.hovering {
+    color: $main-text-color;
+    border: 2px solid $main-color;
+    background: $main-very-light-color;  
+  }
+  .file-label {
+    font-size: 1.2rem;
+  }
+}
+
+.premises-container {
+  display: flex;
+  justify-content: center;
+  height: 5rem;
+  margin-bottom: 2rem;
+}
+
+.uploaded-image {
+  max-width: 180px;
+  border: 2px solid $main-color;
+  @include border-radius-mix(5px);
+}
+
+.chosen-premises-info {
+  @include info-box();
+  right: 1rem;
+}
+
+.image-position {
+  position: absolute;
+  left: 1rem;
+  transform: translateY(1.3rem);
+}
+
+.transfer-info {
+  @include info-box();
+  right: 1rem;
+  transform: translateY(1.3rem);
+}
+
+button {
+  margin: 2px;
+  width: 10rem;
+}
+
+@include phone {
+  mat-progress-bar, .upload-buttons, .image-position {
+    display: none;
+  }
+  .premises-container {
+    height: 4rem;
+  }
+  .transfer-info {
+    @include info-box(80%);
+    left: 9%;
+    transform: translateY(-2.5rem);
+  }
+}

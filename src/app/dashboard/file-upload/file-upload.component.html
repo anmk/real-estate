@@ -1,0 +1,72 @@
+<section>
+  <div class="premises-container">
+    <div *ngIf="(snapshot | async) as snap">
+
+      <div class="upload-buttons">
+        <button
+          mat-raised-button 
+          color="accent" 
+          (click)="task.pause()"
+          [disabled]="!isActive(snap)">
+          Pause
+        </button>
+        <button *ngIf="(snapshot | async) as snap"
+          mat-raised-button 
+          color="warn" 
+          (click)="task.cancel()"
+          [disabled]="!isActive(snap)">
+          Cancel
+        </button>
+        <button *ngIf="(snapshot | async) as snap"
+          mat-raised-button 
+          color="primary" 
+          (click)="task.resume()"
+          [disabled]="!(snap?.state === 'paused')">
+          Resume
+        </button>
+      </div>
+
+      <div *ngIf="percentage | async as pct">
+        <p>{{ pct | number }}%</p>
+        <mat-progress-bar mode="determinate" value="{{ pct | number }}"></mat-progress-bar>
+      </div>
+
+    </div>
+  </div>
+
+  <div *ngIf="(snapshot | async) as snap">
+    <div *ngIf="downloadURL as url" class="image-position">
+      <img [src]="url" class="uploaded-image">
+    </div>
+
+    <div class="transfer-info">
+      {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }} 
+    </div>
+  </div>
+
+  <div class="dropzone" 
+    appDropZone
+    (hovered)="toggleHover($event)"
+    (dropped)="startUpload($event)"
+    [class.hovering]="isHovering">
+    <h3>Photo Drop Zone</h3>
+    <p>Drag and Drop or choose a file…</p>
+    <div class="file">
+      <label class="file-label">
+        <span>
+          <button mat-raised-button 
+            type="button" 
+            (click)="featuredInput.click()" 
+            color="primary"
+            [disabled]="!(premisesIdToPhoto || premisesForm)">
+            Choose a file
+          </button>
+          <input #featuredInput 
+            style="display: none;" 
+            type="file" 
+            (change)="startUpload($event.target.files)">
+        </span>
+      </label>
+    </div>
+  </div>
+</section>
