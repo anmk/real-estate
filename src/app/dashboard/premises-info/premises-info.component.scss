@@ -1,0 +1,23 @@
+@import '../../../variables';
+
+.user-container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  font-size: $main-font-size;
+}
+
+.element {
+  flex: 1;
+  margin: 1rem;
+}
+
+.hint-element {
+  @extend .element;
+  text-align: start;
+}
+
+.user-element {
+  @extend .element;
+  text-align: end;
+}
