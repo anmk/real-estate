@@ -11,7 +11,7 @@ Real Estate uses the following open source projects for proper operation:
 * [Angular CLI](https://github.com/angular/angular-cli)
 * [Angular Material](https://material.angular.io)
 * [Angular Flex-Layout](https://github.com/angular/flex-layout)
-* [Angular Fire](https://github.com/angular/flex-layout)
+* [Angular Fire](https://github.com/angular/angularfire2)
 * [RxJS](https://github.com/ReactiveX/rxjs)
 * [node.js](https://nodejs.org/en/)
 * [Scss](https://github.com/sass)

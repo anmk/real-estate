@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { Observable, Subject, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,7 +8,6 @@ import { Premises, Photos, CountriesType, HeatingsType, PremisesType } from './.
 @Injectable({
   providedIn: 'root'
 })
-
 export class PremisesService {
   private PREMISES_URL = '/premises';
 
@@ -22,10 +20,10 @@ export class PremisesService {
   premises: Observable<Premises>;
   photo: Observable<Photos>;
   pathToPremises: string;
-  gridByBreakpoint = { xl: 6, lg: 4, md: 3, sm: 2, xs: 1 };
+  user: Observable<Premises>;
+  userDoc: AngularFirestoreDocument<Premises>;
 
-  constructor( private afs: AngularFirestore,
-               private mediaObserver: MediaObserver ) {}
+  constructor( private afs: AngularFirestore) {}
 
   getPremises(link: string):
   (Observable<Premises[]>) | (Observable<PremisesType[]>) | (Observable<HeatingsType[]>) | (Observable<CountriesType[]>) {
@@ -67,10 +65,6 @@ export class PremisesService {
   addPhotos(photos: Photos, premisesId: string) {
     return this.afs.collection<Photos>('premises').doc(premisesId)
       .collection('imageUrls').add(photos);
-  }
-
-  adjustToMedia(): Observable<MediaChange> {
-    return this.mediaObserver.media$;
   }
 
   premisesDetailsInfo(premises: Premises) {

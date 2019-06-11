@@ -1,7 +1,7 @@
 <section class="premises-form">
   <form [formGroup]="premisesForm">
-    <mat-grid-list #grid rowHeight="8:1">
-
+    
+    <mat-grid-list [cols]="breakpoint" rowHeight="{{tableRowsHeight}}:1" (window:resize)="setTablePropertiesOnResize($event)">
       <div fxLayoutAlign="center center" fxLayoutGap="20px">
         <mat-grid-tile fxLayout="column" fxLayoutAlign="center center">
           <mat-form-field fxFlex.xs="96%" fxFlex.gt-xs="400px">
