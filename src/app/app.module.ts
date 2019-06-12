@@ -17,6 +17,7 @@ import { PremisesModule } from './premises/premises.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PageNotFoundComponent } from './navigation/page-not-found/page-not-found.component';
 import { SharedModule } from './shared/shared.module';
+import 'hammerjs';
 
 @NgModule({
   declarations: [
