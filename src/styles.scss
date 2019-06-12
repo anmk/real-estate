@@ -54,3 +54,12 @@ body {
 .badge-secondary-accent {
   @include badge($secondary-accent-color, $main-text-color);
 }
+
+/* --- Scrool windows --- */
+.scrool-window-title {
+  margin: 0 0 .2rem 0;
+}
+
+.scrool-window-content {
+  margin: 0;
+}

@@ -60,11 +60,6 @@ $large-desktop-width: 1920px;
   border-radius: $radius;
 }
 
-/* --- Transitions --- */
-@mixin transition($length: 0.3s) {
-  transition: all $length ease-in-out;
-}
-
 /* --- Transforms --- */
 @mixin vertical-align() {
   position: relative;
@@ -106,4 +101,12 @@ $large-desktop-width: 1920px;
   @include border-radius-mix(5px);
   position: absolute;
   padding-left: .2rem;
+  transition: all .3s ease-in-out;
+}
+
+@mixin scrool-window($background: $light-background-color, $color: $main-text-color) {
+  overflow: auto;
+  background-color: $background;
+  color: $color;
+  padding: 10px;
 }
