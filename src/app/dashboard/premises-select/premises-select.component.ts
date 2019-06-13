@@ -1,9 +1,11 @@
 import { Component, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { UserInfo } from 'firebase';
 
 import { Premises, CountriesType, PremisesType, HeatingsType } from '../../shared/models';
+import { AuthService } from '../../core/auth/auth.service';
 import { PremisesService } from '../../services/premises.service';
-
+import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
   selector: 'app-premises-select',
@@ -17,13 +19,16 @@ export class PremisesSelectComponent implements OnDestroy {
   private dataSubscription: Subscription;
   chosenPremises: string;
   premisesData: Premises;
+  user: UserInfo = this.userService.currentUser;
 
   premises$: Observable<Premises[] | PremisesType[] | HeatingsType[] | CountriesType[]> =
     this.premisesService.getPremises(this.PREMISES_URL);
 
   @Output() sharedPremisesId = new EventEmitter();
 
-  constructor(private premisesService: PremisesService) {}
+  constructor(private userService: UserService,
+              private authService: AuthService,
+              private premisesService: PremisesService) {}
 
   sharePremisesId(): void {
     this.sharedPremisesId.emit(this.chosenPremises);

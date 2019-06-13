@@ -22,28 +22,28 @@
   <form #formRef="ngForm" (ngSubmit)="sharePremisesId(formRef.value)">
     <div *ngFor="let premise of premises$ | async" class="photo-container">
       <ng-container>
-        <div class="container-element city-element"> 
+        <div *ngIf="premise.userId===user.uid" class="container-element city-element"> 
             <div class="inner-element">
               {{premise.city}} 
             </div>
         </div>
       </ng-container>
       <ng-container >
-        <div class="container-element street-element">
+        <div *ngIf="premise.userId===user.uid" class="container-element street-element">
           <div class="inner-element">
             {{premise.street}}
           </div>
         </div>
       </ng-container>
       <ng-container>
-        <div class="container-element street-number-element">
+        <div *ngIf="premise.userId===user.uid" class="container-element street-number-element">
           <div class="inner-element">
             {{premise.streetNumber}}
           </div>
         </div>
       </ng-container>
       <ng-container>
-        <div class="container-element selected-element">
+        <div *ngIf="premise.userId===user.uid" class="container-element selected-element">
           <mat-radio-group required [(ngModel)]="chosenPremises" #formRef="ngModel" name="chosenPremises">
             <mat-radio-button class="md-primary inner-element" [value]="premise.id">
             </mat-radio-button>
@@ -63,7 +63,7 @@
       <button mat-raised-button 
         type="submit"
         color="primary"
-        [disabled]="formRef?.invalid">
+        [disabled]="formRef?.invalid || !chosenPremises">
         Confirm
       </button>
     </div>
@@ -77,7 +77,7 @@
     <div fxLayoutAlign="center center" class="info-button">
       <button mat-raised-button 
         color="primary"
-        [disabled]="formRef?.invalid"
+        [disabled]="formRef?.invalid || !chosenPremises"
         (click)="confirmationSelectedPremises()">
         Show more info
       </button>
