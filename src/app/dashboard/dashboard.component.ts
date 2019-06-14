@@ -4,7 +4,9 @@ import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { PremisesService } from '../services/premises.service';
+import { AuthService } from '../core/auth/auth.service';
 import { Photos } from '../shared/models';
+import { UserService } from '../core/user/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +23,9 @@ export class DashboardComponent implements OnDestroy {
   private thumbnailSubscription: Subscription;
   private photoSubscription: Subscription;
 
-  constructor(private premisesService: PremisesService,
+  constructor(private authService: AuthService,
+              private userService: UserService,
+              private premisesService: PremisesService,
               private matSnackBarToast: MatSnackBar) { }
 
   onSharedPremisesId(premisesId: string): void {
@@ -35,6 +39,7 @@ export class DashboardComponent implements OnDestroy {
   createPremises() {
     this.getThumbnailPath();
     this.premisesForm.value.time = this.premisesService.timeOfAddingPremises();
+    this.premisesForm.value.userId = this.userService.currentUser.uid;
     return this.premisesService.addPremises(this.premisesForm.value)
       .then(this.onPremisesSuccess.bind(this), this.onPremisesFailure.bind(this));
   }
