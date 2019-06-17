@@ -1,3 +1,4 @@
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
 # Real estate
 The project is currently under construction.
 ## Introduction
@@ -10,8 +11,18 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Real Estate uses the following open source projects for proper operation:
 * [Angular CLI](https://github.com/angular/angular-cli)
 * [Angular Material](https://material.angular.io)
-* [Angular Flex-Layout](https://github.com/angular/flex-layout)
-* [Angular Fire](https://github.com/angular/angularfire2)
-* [RxJS](https://github.com/ReactiveX/rxjs)
+* [Angular Flex-layout](https://github.com/angular/flex-layout)
+* [Angular Fire](https://github.com/angular/flex-layout)
+* [TypeScript](https://github.com/microsoft/TypeScript)
 * [node.js](https://nodejs.org/en/)
+* [RxJS](https://github.com/ReactiveX/rxjs)
 * [Scss](https://github.com/sass)
+## Some screenshots of the application
+### :iphone: Mobile devices:
+**The most important views on your smartphone.**
+![mobile01a](https://user-images.githubusercontent.com/5839775/59636718-866bc180-9154-11e9-99f7-d864e9ad0b3d.jpg)
+### :computer: Desktop: 
+**Different views from the desktop.**
+![desktop01](https://user-images.githubusercontent.com/5839775/59636685-676d2f80-9154-11e9-8ab2-3a8c9f1e18f3.jpg)
+
+
