@@ -4,6 +4,7 @@ import { Observable, Subject, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Premises, Photos, CountriesType, HeatingsType, PremisesType } from './../shared/models';
+import { User } from '../core/user/user-data.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,10 @@ export class PremisesService {
     return this.getDataCollection(link);
   }
 
+  getUsers(link: string): Observable<User[]> {
+    return this.getDataCollection(link);
+  }
+
   private getDataCollection(link: string) {
     return this.afs.collection(link)
       .snapshotChanges()
@@ -53,7 +58,7 @@ export class PremisesService {
     return this.premises = this.premisesDoc.valueChanges();
   }
 
-  getPhotoById(link: string) {
+  getPhotoByLink(link: string) {
     this.photoDoc = this.afs.doc<Photos>(link);
     return this.photo = this.photoDoc.valueChanges();
   }
