@@ -1,11 +1,10 @@
 <section fxLayout="column" fxLayoutAlign="center center">
   <h1>Please login!</h1>
-  <form 
-    [formGroup]="loginForm"
+  <form [formGroup]="loginForm"
     fxLayout="column"
     fxLayoutAlign="center center"
     fxLayoutGap="10px"
-    (ngSubmit)="onSubmit()">
+    (ngSubmit)="logIn()">
     
     <mat-form-field>
       <input
@@ -22,9 +21,11 @@
         type="password"
         matInput
         placeholder="Your password"
-        formControlName="password">
+        formControlName="password"
+        [type]="hide ? 'password': 'text'">
+      <mat-icon matSuffix (click)="hide = !hide" class="visible-password">{{ hide ? 'visibility' : 'visibility_off' }}</mat-icon>
       <mat-hint>Please enter your password.</mat-hint>
-      <mat-error>Missing password.</mat-error>
+      <mat-error>Invalid or missing password.</mat-error>
     </mat-form-field>
   
     <button 
@@ -34,6 +35,6 @@
       [disabled]="loginForm.invalid">
       Submit
     </button>
-
+    
   </form>
 </section>
