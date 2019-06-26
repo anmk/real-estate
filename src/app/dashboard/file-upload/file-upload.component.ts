@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
@@ -11,6 +12,7 @@ import { PremisesService } from '../../services/premises.service';
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })
+
 export class FileUploadComponent {
   @Input() premisesIdToPhoto: string;
   @Input() premisesForm: FormGroup;
@@ -23,7 +25,8 @@ export class FileUploadComponent {
   isHovering: boolean;
 
   constructor(private storage: AngularFireStorage,
-              private premisesService: PremisesService) { }
+              private premisesService: PremisesService,
+              private matSnackBarToast: MatSnackBar) { }
 
   toggleHover(event: boolean): void {
     this.isHovering = (this.premisesIdToPhoto || this.premisesForm) ? event : false;
@@ -31,10 +34,11 @@ export class FileUploadComponent {
 
   startUpload(event: FileList) {
     const file = event.item(0);
+    const fileType = file.type.split('/')[0];
 
-    if ((file.type.split('/')[0] !== 'image') || (!this.premisesIdToPhoto) && (!this.premisesForm)) {
-      console.error('unsupported file type or missing premises id or form data :( ');
-      return;
+    if ((fileType !== 'image') || (!this.premisesIdToPhoto) && (!this.premisesForm)) {
+      console.error('Unsupported file type or missing premises id or form data :( ');
+      return alert('Unsupported file type or missing premises id or form data :( ');
     }
 
     const basePath = 'premisesPhotos';
@@ -53,6 +57,12 @@ export class FileUploadComponent {
         if (this.downloadURL) {
           this.premisesService.sharePath(this.downloadURL);
           this.uploadStatus.emit(true);
+          this.onUpdateSuccess('Your photo has been uploaded!', '');
+          console.log('Your photo has been uploaded! Download URL: ', this.downloadURL);
+        } else {
+          this.uploadStatus.emit(false);
+          this.onUpdateFailure('An error occured', '');
+          console.log('An error occured');
         }
       })
     );
@@ -60,6 +70,16 @@ export class FileUploadComponent {
 
   isActive(snapshot) {
     return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
+  }
+
+  private onUpdateSuccess(info: string, additionalInfo: string): void {
+    this.matSnackBarToast.open(info, additionalInfo, { panelClass: 'toast-success' });
+    // console.log(info);
+  }
+
+  private onUpdateFailure(info: string, additionalInfo: string): void {
+    this.matSnackBarToast.open(info, additionalInfo, { panelClass: 'toast-error' });
+    // console.error(info);
   }
 
 }
