@@ -1,0 +1,191 @@
+<section class="photo-list-container">
+  
+  <mat-toolbar>
+    <button mat-button class="mode" (click)="editing=false" *ngIf="editing">Done</button>
+    <button mat-button class="mode" (click)="editing=true" *ngIf="!editing">Edit Profile</button>
+    <div [hidden]="editing">
+      <div class="mode-info view-mode">You are now in view mode</div>
+    </div>
+    <div [hidden]="!editing">
+      <div class="mode-info edit-mode">You are now in edit mode</div>
+    </div>
+  </mat-toolbar>
+
+  <ng-container *ngIf="fbUser">
+    <div fxLayoutAlign="center center">
+        <mat-card fxLayout="column">
+        <div [hidden]="editing">
+          
+          <div class="avatar" fxLayoutAlign="end">
+            <ng-container
+              *ngIf="fbUser.photoURL; then photo; else notPhoto">
+            </ng-container>
+
+            <ng-template #photo>
+                <div *ngIf="fbUser.photoURL" class="photoURL outer" [ngStyle]="{'background-image': 'url(' + fbUser.photoURL + ')'}">
+                  <input type="file" accept="image/*" name="file" id="file" class="uploadImage"
+                  (change)="uploadImageURL($event)" accept=".png,.jpg">
+                  <label for="file">Change Image</label>
+                </div>
+            </ng-template>
+
+            <ng-template #notPhoto>
+                <div *ngIf="!fbUser.photoURL" class="photoURL" [ngStyle]="{'background-image': 'url(' + anonymous + ')'}">
+                  <input type="file" accept="image/*" name="file" id="file" class="uploadImage"
+                  (change)="uploadImageURL($event)" accept=".png,.jpg">
+                  <label for="file">Add Image</label>
+                </div>
+            </ng-template>
+          </div>
+
+          <div class="user-details check-box-description" fxLayout="column" fxLayoutAlign="start">
+            <div fxLayout="row" fxLayoutGap.gt-xs="20px" fxLayoutGap.xs="10px">
+              <span *ngIf="fbUser?.displayName"><mat-icon class="check-box">check_box</mat-icon></span>
+              <span *ngIf="!fbUser?.displayName"><mat-icon class="check-box-outline-blank">check_box_outline_blank</mat-icon></span>
+              <mat-card-title *ngIf="fbUser?.displayName">{{ fbUser?.displayName }}</mat-card-title>
+              <span *ngIf="!fbUser?.displayName">You have not added your name yet!</span>
+            </div>
+            
+            <div class="" fxLayout="column" fxLayoutAlign="start">
+              <div fxLayout="row" fxLayoutGap.gt-xs="20px" fxLayoutGap.xs="10px">
+                <span *ngIf="fbUser?.email"><mat-icon class="check-box">check_box</mat-icon></span>
+                <span *ngIf="!fbUser?.email"><mat-icon class="check-box-outline-blank">check_box_outline_blank</mat-icon></span>
+                <span *ngIf="fbUser?.email">E-mail</span>
+                <span *ngIf="fbUser?.email">
+                  <mat-card-subtitle class="user-email badge-standard-light">{{ fbUser?.email }}</mat-card-subtitle>
+                </span>
+              </div>
+            </div>
+              
+            <div fxLayout="row" fxLayoutGap.gt-xs="20px" fxLayoutGap.xs="10px">
+              <span *ngIf="appUser?.contact"><mat-icon class="check-box">check_box</mat-icon></span>
+              <span *ngIf="!appUser?.contact"><mat-icon class="check-box-outline-blank">check_box_outline_blank</mat-icon></span>
+              <span *ngIf="appUser?.contact">Contact 1&#176;</span>
+              <span *ngIf="appUser?.contact">
+                <span class="badge-standard-light">{{ appUser?.contact }}</span>
+              </span>
+              <span *ngIf="!appUser?.contact">You have not added a contact yet!</span>
+            </div>
+
+            <div fxLayout="row" fxLayoutGap.gt-xs="20px" fxLayoutGap.xs="10px">
+              <span *ngIf="appUser?.secondContact"><mat-icon class="check-box">check_box</mat-icon></span>
+              <span *ngIf="!appUser?.secondContact"><mat-icon class="check-box-outline-blank">check_box_outline_blank</mat-icon></span>
+              <span *ngIf="appUser?.secondContact">Contact 2&#176;</span>
+              <span *ngIf="appUser?.secondContact">
+                <span class="badge-standard-light">{{ appUser?.secondContact }}</span>
+              </span>
+              <span *ngIf="!appUser?.secondContact">You have not added a second contact yet!</span>
+            </div>
+            
+            <div fxLayout="column">
+              <div fxLayout="row" fxLayoutGap.gt-xs="20px" fxLayoutGap.xs="10px">
+                <span *ngIf="appUser?.userInfo"><mat-icon class="check-box">check_box</mat-icon></span>
+                <span *ngIf="!appUser?.userInfo"><mat-icon class="check-box-outline-blank">check_box_outline_blank</mat-icon></span>
+                <span *ngIf="appUser?.userInfo">Owner Info</span>
+                <span *ngIf="!appUser?.userInfo">You can add information about yourself in edit mode.</span>
+              </div>
+              <div *ngIf="appUser?.userInfo" class="user-info scrool-window-----">{{ appUser?.userInfo }}</div>
+            </div>
+
+            <div>
+              <mat-card-actions>
+                <button mat-button class="bottom-button" routerLink="../dashboard">... Go to dashboard</button>
+              </mat-card-actions>
+            </div>
+          </div>
+
+      </div>
+
+      <div [hidden]="!editing">
+
+          <div fxLayout.xs="column"
+            fxLayout.gt-xs="row"
+            fxLayoutAlign="center center"
+            fxLayoutGap.gt-sm="20px"
+            fxLayoutGap.sm="10px"
+            fxLayoutGap.xs="0">
+            <form [formGroup]="updateUserProfileForm">
+              <mat-form-field>
+                <input matInput formControlName="displayName">
+                <mat-placeholder *ngIf="!appUser?.displayName" class="placeholder">Update your name</mat-placeholder>
+                <mat-placeholder *ngIf="appUser?.displayName" class="placeholder-active">Update your name</mat-placeholder>
+                <mat-icon matSuffix (click)="updateUserProfile()" class="save">save</mat-icon>
+                <mat-hint align="end">Save</mat-hint>
+                <mat-error *ngIf="updateUserProfileForm.get('displayName').getError('maxlength') as error">
+                  Your name can have a maximum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
+                </mat-error>
+              </mat-form-field>
+            </form>
+
+            <form [formGroup]="updateUserEmailForm">
+              <mat-form-field>
+                <input matInput formControlName="email">
+                <mat-placeholder *ngIf="!appUser?.email" class="placeholder">Update your email</mat-placeholder>
+                <mat-placeholder *ngIf="appUser?.email" class="placeholder-active">Update your email</mat-placeholder>
+                <mat-icon matSuffix (click)="updateUserEmail()" class="save">save</mat-icon>
+                <mat-hint align="end">Save</mat-hint>
+                <mat-error *ngIf="updateUserEmailForm.hasError('required')">
+                  Field must not be empty.
+                </mat-error>
+                <mat-error 
+                  *ngIf="(!updateUserEmailForm.hasError('required'))">
+                    E-Mail is invalid.
+                </mat-error>
+              </mat-form-field>
+            </form>
+          </div>
+
+          <div fxLayout="column">
+            <form [formGroup]="updateAppUserProfileForm">
+                <div fxLayout.xs="column"
+                  fxLayout.gt-xs="row"
+                  fxLayoutAlign="center center"
+                  fxLayoutGap.gt-sm="20px"
+                  fxLayoutGap.sm="10px"
+                  fxLayoutGap.xs="0">
+                  <mat-form-field>    
+                    <input matInput formControlName="contact" value="{{ appUser?.contact }}">
+                    <mat-placeholder *ngIf="!appUser?.contact" class="placeholder">Update your contact</mat-placeholder>
+                    <mat-placeholder *ngIf="appUser?.contact" class="placeholder-active">Update your contact</mat-placeholder>
+                    <mat-icon matSuffix *ngIf="!updateAppUserProfileForm.get('contact').getError('maxlength')"
+                      (click)="updateAppUserContact()" class="save">save</mat-icon>
+                    <mat-hint align="end">Save</mat-hint>
+                    <mat-error *ngIf="updateAppUserProfileForm.get('contact').getError('maxlength') as error">
+                      The contact can have a maximum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
+                    </mat-error>
+                  </mat-form-field>
+            
+                  <mat-form-field>
+                    <input matInput formControlName="secondContact" value="{{ appUser?.secondContact }}">
+                    <mat-placeholder *ngIf="!appUser?.secondContact" class="placeholder">Update your second contact</mat-placeholder>
+                    <mat-placeholder *ngIf="appUser?.secondContact" class="placeholder-active">Update your second contact</mat-placeholder>
+                    <mat-icon matSuffix *ngIf="!updateAppUserProfileForm.get('secondContact').getError('maxlength')"
+                      (click)="updateAppUserSecondContact()" class="save">save</mat-icon>
+                    <mat-hint align="end">Save</mat-hint>
+                    <mat-error *ngIf="updateAppUserProfileForm.get('secondContact').getError('maxlength') as error">
+                      The contact can have a maximum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxLayoutAlign="center center">
+                  <mat-form-field class="textarea">
+                    <textarea class="" matInput formControlName="userInfo" value="{{ appUser?.userInfo }}"></textarea>
+                    <mat-placeholder *ngIf="!appUser?.userInfo" class="placeholder">Update your userInfo</mat-placeholder>
+                    <mat-placeholder *ngIf="appUser?.userInfo" class="placeholder-active">Update your userInfo</mat-placeholder>
+                      <mat-icon matSuffix *ngIf="!updateAppUserProfileForm.get('userInfo').getError('maxlength')"
+                        (click)="updateAppUserInfo()" class="save">save</mat-icon>
+                      <mat-hint align="end">Save</mat-hint>
+                      <mat-error *ngIf="updateAppUserProfileForm.get('userInfo').getError('maxlength') as error">
+                        The text area can have a maximum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
+                      </mat-error>
+                  </mat-form-field>
+                </div>
+            </form>
+          </div>
+
+        </div>
+
+      </mat-card>
+    </div>
+  </ng-container>
+</section>
