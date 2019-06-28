@@ -29,7 +29,7 @@ export class PremisesDetailsPhotoViewComponent implements OnInit, OnDestroy {
 
     this.dataSubscription = this.activatedRoute.paramMap.pipe(
       map(params => params.get('pid')),
-      switchMap(pid => this.premisesService.getPhotoById(`premises/${this.id}/imageUrls/${pid}`))
+      switchMap(pid => this.premisesService.getPhotoByLink(`premises/${this.id}/imageUrls/${pid}`))
     )
     .subscribe(image => this.image = image);
   }
