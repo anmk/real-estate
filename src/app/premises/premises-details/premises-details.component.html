@@ -20,8 +20,8 @@
           <div *ngIf="premises$ | async as premises">
             <div *ngIf="premises.additionalInformations">
               <div class="info-box scrool-window"> 
-                <h1>More information</h1>
-                <p>{{ premises?.additionalInformations }}</p>
+                <h1 class="scrool-window-title">More information!</h1>
+                <p class="scrool-window-content">{{ premises?.additionalInformations }}</p>
               </div>
             </div>
           </div>

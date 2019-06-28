@@ -26,10 +26,7 @@
 }
 
 .scrool-window {
-  overflow: auto;
-  background-color: $light-background-color;
-  color: $main-text-color;
-  padding: 10px;
+  @include scrool-window();
 }
 
 .details-container {
