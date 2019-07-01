@@ -1,8 +1,12 @@
 @import '../../../../variables';
 @import '../../../../mixins';
 
-mat-card-title, mat-card-subtitle, mat-card-actions {
+.mat-card-title, .mat-card-subtitle {
   margin: .2rem 0;
+}
+
+.mat-card-actions {
+  display: none;
 }
 
 .details-min {
@@ -18,7 +22,6 @@ mat-card-title, mat-card-subtitle, mat-card-actions {
 .box {
   display: flex;
   flex-wrap: wrap;
-  
 }
 
 .box>* {
@@ -38,7 +41,7 @@ mat-card-title, mat-card-subtitle, mat-card-actions {
 
 .address-description {
   @extend .basic-description;
-  margin-top: .1rem;
+  margin-top: .5rem;
 }
 
 .address-data {
@@ -60,11 +63,6 @@ mat-card-title, mat-card-subtitle, mat-card-actions {
   margin: 0;
 }
 
-.address {
-  margin: 0 0 2px 0;
-  padding: 0;
-}
-
 .badge-box {
   margin-bottom: .5rem;
   padding: 0;
@@ -78,6 +76,48 @@ mat-card-title, mat-card-subtitle, mat-card-actions {
   color: $success-color;
 }
 
+.photoURL {
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  margin-top: .5rem;
+  margin-right: .5rem;
+  transition: all .3s ease-in-out;
+}
+
+.outer {
+  border: 2px solid $main-text-color;
+}
+
+.user-info {
+  height: 4rem;
+  width: 9rem;
+  border: 2px solid $main-text-color;
+  font-size: $badge-card-font-size;
+  @include border-radius-mix(5px);
+  @include scrool-window();
+}
+
+.user-details {
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+
+.user-details-description {
+  font-size: $main-font-size;
+}
+
+.user-name {
+  font-size: $title-font-size;
+  font-style: italic;
+  color: $light-text-color;
+}
+
+.badge-standard-light {
+  font-size: $badge-card-font-size;
+  padding: 2px;
+}
+
 @include small-phone {
   .box {
     width: 220px;
@@ -85,11 +125,20 @@ mat-card-title, mat-card-subtitle, mat-card-actions {
   .box>* {
       flex: 0 0 50%;
   }
-  .badge-secondary-accent {
-    border: 1px solid $secondary-accent-color;
-  }
   button {
     width: 96%;
+  }
+  .address-description {
+    width: 94%;
+  }
+  .mat-card-actions {
+    display: block;
+    width: 96%;
+    margin-left: 0;
+  }
+  .user-info {
+    width: 80%;
+    margin-left: -1.2rem;
   }
 }
 
@@ -100,11 +149,20 @@ mat-card-title, mat-card-subtitle, mat-card-actions {
   .box>* {
       flex: 0 0 33.33333333%;
   }
-  .badge-secondary-accent {
-    border: 1px solid $secondary-accent-color;
-  }
   button {
     width: 96%;
+  }
+  .address-description {
+    width: 94%;
+  }
+  .mat-card-actions {
+    display: block;
+    width: 98%;
+    margin-left: 0;
+  }
+  .user-info {
+    width: 60%;
+    margin-left: -1.2rem;
   }
 }
 

@@ -1,98 +1,154 @@
 <section class="photo-list-container">
   <div *ngIf="premises$ | async as premises">
-    <div>
-      <mat-card-title>{{ premises?.city }}</mat-card-title>
-      <mat-card-subtitle >{{ premises?.street }}</mat-card-subtitle>
+    
+    <div fxLayout="row" fxLayoutAlign="start start">
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <mat-card-title>{{ premises?.city }}</mat-card-title>
+        <mat-card-subtitle >{{ premises?.street }}</mat-card-subtitle>
+      </div>
     </div>
 
-    <div fxLayoutAlign.xs="center center">
-      <div class="box">
-        <div *ngFor="let photo of photos$ | async">
-          <img *ngIf="photo"
-          [attr.src]="photo.url"
-          [routerLink]="['imageUrls', photo.id]"
-          class="details-min">
+    <div fxLayout="column" fxLayoutAlign.xs="center center" fxLayoutGap="10px"> 
+      <div fxLayoutAlign.xs="center center">
+        <div class="box">
+          <div *ngFor="let photo of photos$ | async">
+            <img *ngIf="photo.url"
+              [attr.src]="photo.url"
+              [routerLink]="['imageUrls', photo.id]"
+              class="details-min">
+          </div>
         </div>
       </div>
+    
+      <div fxLayout.gt-xs="row"
+        fxLayout.xs="column"
+        fxLayoutAlign.xs="start start"
+        fxLayoutAlign.gt-xs="space-between"
+        fxLayoutGap="10px">
+
+        <div fxLayout="column" fxLayoutAlign.xs="start start">
+          <div class="address-description" fxLayout="row" fxLayoutAlign="center center">
+            <div *ngIf="premises.city" class="badge-secondary-accent address-data">
+              {{ premises?.streetNumber }}<span *ngIf="premises.flat">/</span>{{ premises?.flat }}&nbsp; 
+              {{ premises?.street }}&nbsp; 
+              {{ premises?.city }}&nbsp; 
+              {{ premises?.country }}
+            </div>
+          </div>
+
+          <div class="badge-box">
+            <p *ngIf="premises.premises" class="premises-description">Type of premises&nbsp;
+              <span class="badge-success">
+                {{premises?.premises}}
+              </span>
+            </p>
+            <p *ngIf="premises.heating" class="premises-description">Heating&nbsp;
+              <span class="badge-primary-accent">
+                {{premises?.heating}}
+              </span>
+            </p>
+          </div>
+
+          <div>
+            <p class="check-box-description">
+
+              <span *ngIf="premises.fornished" class="inner-description">
+                Fornished
+                <mat-icon class="check-box-outline-blank">
+                  check_box
+                </mat-icon>
+                yes
+              </span>
+
+              <span *ngIf="!premises?.fornished" class="inner-description">
+                Fornished
+                <mat-icon class="check-box">
+                    check_box_outline_blank
+                </mat-icon>
+                not
+              </span>
+            
+              <span *ngIf="!premises.rented" class="inner-description">
+                Rented
+                <mat-icon class="check-box-outline-blank">
+                  check_box_outline_blank
+                </mat-icon>
+                not
+              </span>
+            
+              <span *ngIf="premises.rented" class="inner-description">
+                  Rented
+                <mat-icon class="check-box">
+                  check_box
+                </mat-icon>
+                yes
+              </span>
+            </p>
+
+            <p class="area-description">
+              <span 
+                *ngIf="premises.area" 
+                matBadge="{{premises?.area}}" 
+                matBadgeOverlap="false" 
+                matBadgeColor="primary">
+                Area&nbsp;[m<sup>2</sup>]
+              </span>
+            </p>
+          </div>
+        </div> 
+
+        <div fxLayout="column" fxLayoutAlign="start start">
+          <div *ngFor="let user of users$ | async">
+            <div *ngIf="user?.uid===premises?.userId">
+
+              <div fxLayout="row" fxLayoutAlign="space-evenly">
+                <div fxLayout="column" fxLayoutAlign="center start">
+                  <span *ngIf="user.displayName" class="user-details-description">Owner:</span>
+                  <span *ngIf="user.displayName" class="user-name">{{ user?.displayName }}</span>
+                </div>
+
+                <div fxLayout="column" fxLayoutAlign="center end">
+                  <img class="photoURL outer"
+                    *ngIf="user.photoURL"
+                    [attr.src]="user?.photoURL">
+                  <img class="photoURL"
+                    *ngIf="(!user.photoURL && (user.contact || user.secondContact || user.displayName || user.userInfo))"
+                    [attr.src]="anonymous">
+                </div>
+              </div>
+
+              <div fxLayout="column" fxLayoutAlign="start start">
+                <div class="user-details" fxLayout="row">
+                  <span *ngIf="user.contact">
+                    <span class="badge-standard-light">{{ user?.contact }}</span>
+                  </span>
+                </div>
+    
+                <div class="user-details" fxLayout="row">
+                  <span *ngIf="user.secondContact">
+                    <span class="badge-standard-light">{{ user?.secondContact }}</span>
+                  </span>
+                </div>
+                
+                <div class="user-details" fxLayout="row" fxLayoutAlign="center center">
+                  <div *ngIf="user.userInfo" class="user-info">
+                      <h1 class="scrool-window-title">Owner info!</h1>
+                      <p class="scrool-window-content">{{ user?.userInfo }}</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
     </div>
-
     <div>
-      <div class="address-description">
-        <p *ngIf="premises?.city" class="address">Address</p>
-        <span *ngIf="premises?.city" class="badge-secondary-accent address-data">
-            {{ premises?.streetNumber }}/{{ premises?.flat }} &nbsp;
-            {{ premises?.street }} &nbsp;
-            {{ premises?.city }} &nbsp;
-            {{ premises?.country }}
-        </span>
-      </div>
-
-      <div class="badge-box">
-        <p *ngIf="premises?.premises" class="premises-description">Type of premises&nbsp;
-          <span class="badge-success">
-            {{premises?.premises}}
-          </span>
-        </p>
-        <p *ngIf="premises?.heating" class="premises-description">Heating&nbsp;
-          <span class="badge-primary-accent">
-            {{premises?.heating}}
-          </span>
-        </p>
-      </div>
-
-      <div>
-        <p class="check-box-description">
-
-          <span *ngIf="premises?.fornished" class="inner-description">
-            Fornished
-            <mat-icon class="check-box-outline-blank">
-              check_box
-            </mat-icon>
-            yes
-          </span>
-
-          <span *ngIf="!premises?.fornished" class="inner-description">
-            Fornished
-            <mat-icon class="check-box">
-                check_box_outline_blank
-            </mat-icon>
-            not
-          </span>
-        
-          <span *ngIf="!premises?.rented" class="inner-description">
-            Rented
-            <mat-icon class="check-box-outline-blank">
-              check_box_outline_blank
-            </mat-icon>
-            not
-          </span>
-        
-          <span *ngIf="premises?.rented" class="inner-description">
-              Rented
-            <mat-icon class="check-box">
-              check_box
-            </mat-icon>
-            yes
-          </span>
-        </p>
-
-        <p class="area-description">
-          <span 
-            *ngIf="premises?.area" 
-            matBadge="{{premises?.area}}" 
-            matBadgeOverlap="false" 
-            matBadgeColor="primary">
-            Area&nbsp;[m<sup>2</sup>]
-          </span>
-        </p>
-      </div>
-  
-      <div>
-        <mat-card-actions>
-          <button mat-button routerLink="../">... Go back to premises</button>
-        </mat-card-actions>
-      </div>
-
+      <mat-card-actions>
+        <button mat-button routerLink="./../../premises">... Go to premises</button>
+      </mat-card-actions>
     </div>
   </div>
 </section>
