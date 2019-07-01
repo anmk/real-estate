@@ -11,6 +11,10 @@
     <mat-icon>keyboard</mat-icon>
     <span class="nav-space">Dashboard</span>
   </a>
+  <a *ngIf="isAuth" mat-list-item routerLink="/profile" (click)="onCloseSidenav()">
+    <mat-icon>person</mat-icon>
+    <span class="nav-space">Profile</span>
+  </a>
   <a *ngIf="!isAuth" mat-list-item routerLink="/signup" (click)="onCloseSidenav()">
     <mat-icon>face</mat-icon>
     <span class="nav-space">Signup</span>

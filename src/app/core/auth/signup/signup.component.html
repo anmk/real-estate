@@ -2,9 +2,10 @@
   <h1>Please signup!</h1>
   <form [formGroup]="signupForm" 
     fxLayout="column" 
-    fxLayoutAlign="center center" 
-    (ngSubmit)="onSubmit()">
-    
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+    (ngSubmit)="signUp()">
+
     <mat-form-field hintLabel="Enter e-mail">
       <input 
         type="email" 
@@ -32,17 +33,21 @@
         name="password"
         required
         minlength="8"
-        formControlName="password">
+        formControlName="password"
+        [type]="hide ? 'password': 'text'">
+      <mat-icon matSuffix (click)="hide = !hide" class="visible-password">{{ hide ? 'visibility' : 'visibility_off' }}</mat-icon>
       <mat-hint align="end">
-        {{signupForm.value?.password.length}}/8
+          {{signupForm.value?.password.length}}/8
       </mat-hint>
       <mat-error>
-        Must have at least 8 characters.
+        The password may contain letters and numbers, 
+        it must have at least 8 maximum 30 characters, 
+        including at least one letter and one number.
       </mat-error>
     </mat-form-field>
 
     <button 
-      type="submit" 
+      type="submit"
       mat-raised-button 
       color="primary">
       Submit

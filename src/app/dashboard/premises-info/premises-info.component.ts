@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { UserInfo } from 'firebase';
 
-import { AuthService } from '../../core/auth/auth.service';
+// import { AuthService } from '../../core/auth/auth.service';
+import { UserService } from 'src/app/core/user/user.service';
 
 
 @Component({
@@ -11,10 +12,10 @@ import { AuthService } from '../../core/auth/auth.service';
 })
 
 export class PremisesInfoComponent {
-  user: UserInfo = this.authService.user;
+  user: UserInfo = this.userService.currentUser;
 
   @Input() hint: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private userService: UserService) { }
 
 }

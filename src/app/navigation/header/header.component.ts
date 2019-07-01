@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from './../../core/auth/auth.service';
@@ -8,13 +9,15 @@ import { AuthService } from './../../core/auth/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent implements OnInit, OnDestroy {
   isAuth = false;
   private authSubscription: Subscription;
 
   @Output() toggleSidenav = new EventEmitter<void>();
 
-  constructor( protected authService: AuthService ) {}
+  constructor(protected router: Router,
+              protected authService: AuthService ) {}
 
   ngOnInit(): void {
     this.changeAuth();

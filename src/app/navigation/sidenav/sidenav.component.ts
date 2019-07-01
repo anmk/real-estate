@@ -1,7 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from './../../core/auth/auth.service';
 import { HeaderComponent } from '../header/header.component';
+
 
 @Component({
   selector: 'app-sidenav',
@@ -12,8 +14,9 @@ import { HeaderComponent } from '../header/header.component';
 export class SidenavComponent extends HeaderComponent {
   @Output() closeSidenav = new EventEmitter<void>();
 
-  constructor( protected authService: AuthService ) {
-    super(authService);
+  constructor(protected router: Router,
+              protected authService: AuthService ) {
+    super(router, authService);
   }
 
   private onCloseSidenav(): void {

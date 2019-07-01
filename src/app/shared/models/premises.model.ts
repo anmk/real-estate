@@ -1,5 +1,6 @@
 export interface Premises {
     id: string;
+    userId: string;
     country: string;
     city: string;
     street: string;
@@ -12,4 +13,5 @@ export interface Premises {
     fornished: boolean;
     thumbnailUrl: string;
     additionalInformations: string | null;
+    time: number;
   }

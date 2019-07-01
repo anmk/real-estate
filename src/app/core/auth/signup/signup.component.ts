@@ -5,11 +5,12 @@ import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-signup',
-  templateUrl: './signup.component.html'
+  templateUrl: './signup.component.html',
+  styleUrls: ['./../auth.component.scss']
 })
-
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+  hide = true;
 
   constructor(private authService: AuthService,
               private formBuilder: FormBuilder) { }
@@ -20,13 +21,14 @@ export class SignupComponent implements OnInit {
 
   private buildSignupForm(): void {
     this.signupForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email] ],
-      password: ['', [Validators.required] ]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(30),
+                      Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')]]
     });
   }
 
-  onSubmit(): void {
-    this.authService.registerUser({
+  signUp() {
+    return this.authService.registerUser({
       email: this.signupForm.value.email,
       password: this.signupForm.value.password
     });

@@ -1,0 +1,206 @@
+@import '../../../../variables';
+@import '../../../../mixins';
+
+.mode {
+  width: 7rem;
+  margin-right: 1rem;
+}
+
+.mode-info {
+  font-size: $main-font-size;
+}
+
+.view-mode {
+  color: $main-accent-color;
+}
+
+.edit-mode {
+  color: $primary-light-accent-color;
+}
+
+.photoURL {
+  border-radius: 50%;
+  height: 10rem;
+  width: 10rem;
+  margin-top: 1.5rem;
+  margin-right: 1.5rem;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  color: transparent;
+  float: right;
+  transition: all .3s ease-in-out;
+}
+
+.outer {
+  border: 2px solid $main-text-color;
+}
+
+.photoURL:hover {
+  background-color: rgba(0, 0, 0, .3);
+  color: $clear-color;
+  transition: all .3s ease-in-out;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.photoURL label {
+  display: inline-block;
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
+  cursor: pointer;
+}
+
+.uploadImage {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.avatar {
+  min-height: 13.5rem;
+}
+
+.user-details {
+  font-size: $main-font-size;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.user-info {
+  height: 10rem;
+  width: 50%;
+  border: 2px solid $main-text-color;
+  font-size: $main-font-size;
+  @include border-radius-mix(5px);
+  @include scrool-window();
+}
+
+textarea {
+  height: 10rem;
+}
+
+.bottom-button {
+  position: absolute;
+  bottom: 1rem;
+}
+
+.check-box {
+  color: $success-color;
+  transform: translateY(-10%);
+}
+
+.check-box-outline-blank {
+  color: $error-color;
+  transform: translateY(-15%);
+}
+
+.user-email {
+  transform: translateY(-15%);
+}
+
+.save {
+  cursor: pointer;
+  color: $light-text-color;
+}
+
+.save:hover {
+  color: $deep-color;
+}
+
+.save:active {
+  color: $primary-accent-color;
+}
+
+.mat-card {
+  margin-top: 1rem;
+  height: 43rem;
+  width: 94%;
+}
+
+.mat-toolbar{
+  height: 3rem;
+}
+
+.mat-form-field {
+  margin-top: 1.5rem;
+  width: 270px;
+  font-size: $main-font-size;
+}
+
+.placeholder {
+  color: $secondary-accent-color;
+  font-style: italic;
+}
+
+.placeholder-active, .mat-focused .placeholder, .mat-focused .placeholder-active {
+  color: $main-accent-color;
+  font-style: italic;
+}
+
+.badge-standard-light {
+  font-size: $badge-card-font-size;
+  padding: 2px;
+}
+
+.mat-error {
+  margin-top: .3rem;  
+}
+
+.mat-hint {
+  font-size: $main-font-size;
+}
+
+.mat-card-subtitle {
+  margin-bottom: 0;
+}
+
+.mat-card-actions {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+@include phone {
+  .user-details {
+    width: 90%;
+    margin: auto;
+  }
+  .user-info {
+    width: auto;
+  }
+  .bottom-button {
+    width: 87%;
+    margin: auto;
+  }
+}
+
+@include only-tablet {
+  .mat-form-field.textarea {
+    width: 550px;
+  }
+}
+
+@include only-small-desktop {
+  .mat-form-field.textarea {
+    width: 560px;
+  }
+}
+
+@include desktop {
+  .mat-form-field {
+    width: 390px;
+  }
+  .mat-form-field.textarea {
+    width: 800px;
+  }
+  .user-info {
+    width: 30%;
+  }
+}
