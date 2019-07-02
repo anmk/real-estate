@@ -25,6 +25,7 @@ Real Estate uses the following open source projects for proper operation:
 ![mobile01a](https://user-images.githubusercontent.com/5839775/59636718-866bc180-9154-11e9-99f7-d864e9ad0b3d.jpg)
 ![mobile02a](https://user-images.githubusercontent.com/5839775/59637788-f24f2980-9156-11e9-8d9c-0eba307d7352.jpg)
 ![mobile03a](https://user-images.githubusercontent.com/5839775/59637813-fd09be80-9156-11e9-86b3-21c94a98d108.jpg)
+![mobile04](https://user-images.githubusercontent.com/5839775/60545322-201d9c00-9d1b-11e9-9500-927d92192026.jpg)
 ### :computer: Desktop: 
 **Different views from the desktop.**  
 
@@ -67,3 +68,23 @@ Real Estate uses the following open source projects for proper operation:
 :point_right: *Confirmation of saving data in the Firebase Database and logging out.* :point_down:
 
 ![desktop10](https://user-images.githubusercontent.com/5839775/59638005-7dc8ba80-9157-11e9-8c4d-ce9102765ae1.jpg)  
+
+:point_right: *On the left: The logged-out user browses the premises of Mariusz, who has not added a photo yet. On the right: Login screen.* :point_down:
+
+![desktop11](https://user-images.githubusercontent.com/5839775/60545383-3deb0100-9d1b-11e9-9633-baee1a836697.jpg)
+
+:point_right: *On the left: A user logged in as Robert browses Mark's premises. On the right: Robert's profile.* :point_down:
+
+![desktop12](https://user-images.githubusercontent.com/5839775/60545419-522efe00-9d1b-11e9-9cb2-8fcab76c8b07.jpg)
+
+:point_right: *Editing a  second contact and validating errors.* :point_down:
+
+![desktop13](https://user-images.githubusercontent.com/5839775/60545448-6246dd80-9d1b-11e9-908b-4e445b3c2f21.jpg)
+
+:point_right: *Saving the second contact.* :point_down:
+
+![desktop14](https://user-images.githubusercontent.com/5839775/60545467-6f63cc80-9d1b-11e9-979d-797bbec8b11a.jpg)
+
+:point_right: *View of the contact entered and change of the avatar.* :point_down:
+
+![desktop15](https://user-images.githubusercontent.com/5839775/60545483-7b4f8e80-9d1b-11e9-81ae-07c221b1f614.jpg)
