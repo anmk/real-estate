@@ -1,0 +1,9 @@
+<div class="user-container">
+  <div class="hint-element">
+    <span *ngIf="hint">{{ hint }}</span>
+  </div>
+  <div *ngIf="user" class="user-element">
+    <span *ngIf="(auth && user.displayName)">Hello {{ user.displayName }}!</span>
+    <span *ngIf="(auth && !user.displayName)">Hello {{ user.email }}</span>
+  </div>
+</div>
