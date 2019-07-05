@@ -4,15 +4,16 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MaterialModule } from './material/material.module';
+import { UserInfoComponent } from './components/user-info/user-info.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [UserInfoComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     CommonModule,
@@ -20,6 +21,7 @@ import { MaterialModule } from './material/material.module';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    UserInfoComponent
   ]
 })
 
