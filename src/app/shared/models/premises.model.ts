@@ -1,3 +1,5 @@
+import { Photos } from './photos.model';
+
 export interface Premises {
     id: string;
     userId: string;
@@ -11,7 +13,7 @@ export interface Premises {
     heating: 'gas' | 'electric' | 'district' | null;
     rented: boolean;
     fornished: boolean;
-    thumbnailUrl: string;
+    thumbnail: Photos;
     additionalInformations: string | null;
     time: number;
   }

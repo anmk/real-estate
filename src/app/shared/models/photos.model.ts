@@ -1,6 +1,7 @@
 export interface Photos {
-    url?: string;
-    description?: string;
+    url: string;
+    nameInStorage?: string;
     id?: string;
     pid?: string;
+    description?: string;
   }
