@@ -1,8 +1,8 @@
 <mat-tab-group>
   <mat-tab label="New premises">
-    <app-premises-info
+    <app-user-info
       [hint]="'Add a new place.'">
-    </app-premises-info>
+    </app-user-info>
     <app-premises-form
       (shownPremisesForm)="onShownPremisesForm($event)">
     </app-premises-form>
@@ -29,9 +29,9 @@
   </mat-tab>
 
   <mat-tab label="Add photos">
-    <app-premises-info
+    <app-user-info
       [hint]="'Choose the place you want to add photos to.'">
-    </app-premises-info>
+    </app-user-info>
     <app-premises-select 
       (sharedPremisesId)="onSharedPremisesId($event)">
     </app-premises-select>
@@ -39,7 +39,7 @@
       <span>You confirmed this: "{{ premisesIdToPhoto }}" premises id. 
         Now you can send a photo to the cloud.</span>
     </div>
-    <div class="odstep-">
+    <div class="">
     <app-file-upload
       [premisesIdToPhoto]="premisesIdToPhoto" 
       (uploadStatus)="onStatus($event)">
@@ -59,17 +59,5 @@
     </div>
     <div class="bottom">
     </div>
-  </mat-tab>
-  
-  <mat-tab label="Edit premises">
-    <app-premises-info
-      [hint]="'Choose the place you want to edit.'">
-    </app-premises-info>
-  </mat-tab>
-
-  <mat-tab label="Delete premises">
-    <app-premises-info
-      [hint]="'Choose the place you want to delete.'">
-    </app-premises-info>
   </mat-tab>
 </mat-tab-group>

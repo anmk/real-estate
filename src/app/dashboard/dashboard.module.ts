@@ -8,7 +8,6 @@ import { DropZoneDirective } from '../shared/directives/drop-zone.directive';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FileSizePipe } from '../shared/pipes/file-size.pipe';
 import { PremisesSelectComponent } from './premises-select/premises-select.component';
-import { PremisesInfoComponent } from './premises-info/premises-info.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -18,8 +17,7 @@ import { SharedModule } from '../shared/shared.module';
     FileUploadComponent,
     DropZoneDirective,
     FileSizePipe,
-    PremisesSelectComponent,
-    PremisesInfoComponent
+    PremisesSelectComponent
   ],
   imports: [
     DashboardRoutingModule,
@@ -27,5 +25,4 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule
   ]
 })
-
 export class DashboardModule { }

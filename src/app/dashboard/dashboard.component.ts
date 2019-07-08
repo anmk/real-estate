@@ -4,7 +4,6 @@ import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { PremisesService } from '../services/premises.service';
-import { AuthService } from '../core/auth/auth.service';
 import { Photos } from '../shared/models';
 import { UserService } from '../core/user/user.service';
 
@@ -23,8 +22,7 @@ export class DashboardComponent implements OnDestroy {
   private thumbnailSubscription: Subscription;
   private photoSubscription: Subscription;
 
-  constructor(private authService: AuthService,
-              private userService: UserService,
+  constructor(private userService: UserService,
               private premisesService: PremisesService,
               private matSnackBarToast: MatSnackBar) { }
 
@@ -46,22 +44,25 @@ export class DashboardComponent implements OnDestroy {
 
   createPhotoLink() {
     this.getPhotoPath();
-    return this.premisesService.addPhotos({url: this.imageUrls.url, description: ''}, this.premisesIdToPhoto)
+    return this.premisesService
+      .addPhotos(
+        {url: this.imageUrls.url, nameInStorage: this.imageUrls.nameInStorage},
+        this.premisesIdToPhoto
+      )
       .then(this.onPhotoLinkSuccess.bind(this), this.onPhotoLinkFailure.bind(this));
   }
 
   private getThumbnailPath(): void {
     this.thumbnailSubscription = this.premisesService.pathToPremisesSource$
-      .subscribe((path => {
-        this.premisesForm.value.thumbnailUrl = path;
+      .subscribe((photoData => {
+        this.premisesForm.value.thumbnail = photoData;
       }));
   }
 
   private getPhotoPath(): void {
     this.photoSubscription = this.premisesService.pathToPremisesSource$
-      .subscribe((path => {
-        this.imageUrls = {};
-        this.imageUrls.url = path;
+      .subscribe((photoData => {
+        this.imageUrls = photoData;
       }));
   }
 
