@@ -109,7 +109,7 @@
                 <input matInput formControlName="displayName">
                 <mat-placeholder *ngIf="!appUser?.displayName" class="placeholder">Update your name</mat-placeholder>
                 <mat-placeholder *ngIf="appUser?.displayName" class="placeholder-active">Update your name</mat-placeholder>
-                <mat-icon matSuffix (click)="updateUserProfile()" class="save">save</mat-icon>
+                <mat-icon matSuffix (click)="updateUserProfile()" class="press">save</mat-icon>
                 <mat-hint align="end">Save</mat-hint>
                 <mat-error *ngIf="updateUserProfileForm.get('displayName').getError('maxlength') as error">
                   Your name can have a maximum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
@@ -122,7 +122,7 @@
                 <input matInput formControlName="email">
                 <mat-placeholder *ngIf="!appUser?.email" class="placeholder">Update your email</mat-placeholder>
                 <mat-placeholder *ngIf="appUser?.email" class="placeholder-active">Update your email</mat-placeholder>
-                <mat-icon matSuffix (click)="updateUserEmail()" class="save">save</mat-icon>
+                <mat-icon matSuffix (click)="updateUserEmail()" class="press">save</mat-icon>
                 <mat-hint align="end">Save</mat-hint>
                 <mat-error *ngIf="updateUserEmailForm.hasError('required')">
                   Field must not be empty.
@@ -148,7 +148,7 @@
                     <mat-placeholder *ngIf="!appUser?.contact" class="placeholder">Update your contact</mat-placeholder>
                     <mat-placeholder *ngIf="appUser?.contact" class="placeholder-active">Update your contact</mat-placeholder>
                     <mat-icon matSuffix *ngIf="!updateAppUserProfileForm.get('contact').getError('maxlength')"
-                      (click)="updateAppUserContact()" class="save">save</mat-icon>
+                      (click)="updateAppUserContact()" class="press">save</mat-icon>
                     <mat-hint align="end">Save</mat-hint>
                     <mat-error *ngIf="updateAppUserProfileForm.get('contact').getError('maxlength') as error">
                       The contact can have a maximum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
@@ -160,7 +160,7 @@
                     <mat-placeholder *ngIf="!appUser?.secondContact" class="placeholder">Update your second contact</mat-placeholder>
                     <mat-placeholder *ngIf="appUser?.secondContact" class="placeholder-active">Update your second contact</mat-placeholder>
                     <mat-icon matSuffix *ngIf="!updateAppUserProfileForm.get('secondContact').getError('maxlength')"
-                      (click)="updateAppUserSecondContact()" class="save">save</mat-icon>
+                      (click)="updateAppUserSecondContact()" class="press">save</mat-icon>
                     <mat-hint align="end">Save</mat-hint>
                     <mat-error *ngIf="updateAppUserProfileForm.get('secondContact').getError('maxlength') as error">
                       The contact can have a maximum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
@@ -173,7 +173,7 @@
                     <mat-placeholder *ngIf="!appUser?.userInfo" class="placeholder">Update your userInfo</mat-placeholder>
                     <mat-placeholder *ngIf="appUser?.userInfo" class="placeholder-active">Update your userInfo</mat-placeholder>
                       <mat-icon matSuffix *ngIf="!updateAppUserProfileForm.get('userInfo').getError('maxlength')"
-                        (click)="updateAppUserInfo()" class="save">save</mat-icon>
+                        (click)="updateAppUserInfo()" class="press">save</mat-icon>
                       <mat-hint align="end">Save</mat-hint>
                       <mat-error *ngIf="updateAppUserProfileForm.get('userInfo').getError('maxlength') as error">
                         The text area can have a maximum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}

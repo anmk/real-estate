@@ -106,19 +106,6 @@ textarea {
   transform: translateY(-15%);
 }
 
-.save {
-  cursor: pointer;
-  color: $light-text-color;
-}
-
-.save:hover {
-  color: $deep-color;
-}
-
-.save:active {
-  color: $primary-accent-color;
-}
-
 .mat-card {
   margin-top: 1rem;
   height: 43rem;
