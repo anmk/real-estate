@@ -14,7 +14,6 @@ import { Premises } from './../../shared/models';
 
 export class PremisesDetailsComponent implements OnInit {
   premises$: Observable<Premises>;
-  private id: string;
 
   constructor(protected activatedRoute: ActivatedRoute,
               protected premisesService: PremisesService) {}
