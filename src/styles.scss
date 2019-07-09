@@ -63,3 +63,17 @@ body {
 .scrool-window-content {
   margin: 0;
 }
+
+/* --- Buttons with icons --- */
+.press {
+  cursor: pointer;
+  color: $light-text-color;
+}
+
+.press:hover {
+  color: $deep-color;
+}
+
+.press:active {
+  color: $primary-accent-color;
+}
