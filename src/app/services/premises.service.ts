@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 
 import { Premises, Photos, CountriesType, HeatingsType, PremisesType } from './../shared/models';
 import { User } from '../core/user/user-data.model';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class PremisesService {
 
   selectedPremisesId$ = new Subject<string>();
   premisesDetailsSource$ = new Subject<Premises>();
-  pathToPremisesSource$ = new ReplaySubject<string>();
+  pathToPremisesSource$ = new ReplaySubject<Photos>();
   premisesDoc: AngularFirestoreDocument<Premises>;
   premisesUrls: AngularFirestoreDocument<[]>;
   photoDoc: AngularFirestoreDocument<Photos>;
@@ -24,7 +26,9 @@ export class PremisesService {
   user: Observable<Premises>;
   userDoc: AngularFirestoreDocument<Premises>;
 
-  constructor( private afs: AngularFirestore) {}
+  constructor(private afs: AngularFirestore,
+              private storage: AngularFireStorage,
+              private matSnackBarToast: MatSnackBar) {}
 
   getPremises(link: string):
   (Observable<Premises[]>) | (Observable<PremisesType[]>) | (Observable<HeatingsType[]>) | (Observable<CountriesType[]>) {
@@ -82,12 +86,34 @@ export class PremisesService {
     return this.selectedPremisesId$.asObservable();
   }
 
-  sharePath(path: string): void {
-    this.pathToPremisesSource$.next(path);
+  sharePath(photoData: Photos): void {
+    this.pathToPremisesSource$.next(photoData);
   }
 
   timeOfAddingPremises(): number {
     return new Date().getTime();
+  }
+
+  deleteImage(id: string, pid: string, name: string) {
+    // Delete from storage
+    this.storage.ref('premisesPhotos').child(name).delete().toPromise()
+    .then(
+      // Delete from database
+      this.afs.doc(`premises/${id}/imageUrls/${pid}`).delete()
+      .then(() => this.onUpdateSuccess('Image has been deleted!', ''))
+      .catch((error) => this.onUpdateFailure(error.message, ''))
+    )
+    .catch((error) => this.onUpdateFailure(error.message, ''));
+  }
+
+  private onUpdateSuccess(info: string, additionalInfo: string): void {
+    this.matSnackBarToast.open(info, additionalInfo, { panelClass: 'toast-success' });
+    // console.log(info);
+  }
+
+  private onUpdateFailure(info: string, additionalInfo: string): void {
+    this.matSnackBarToast.open(info, additionalInfo, { panelClass: 'toast-error' });
+    // console.error(info);
   }
 
 }
