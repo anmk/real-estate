@@ -1,11 +1,30 @@
 @import '../../../../variables';
 @import '../../../../mixins';
 
+.image-description {
+  font-family: $primary-font;
+  font-size: $main-font-size;
+  margin-left: .5rem;
+}
+
 .details-img {
   width: 100%;
   height: 100%;
   border: 2px solid $light-text-color;
   margin-left: -.1rem;
+}
+
+.icon{
+  float: right;
+}
+
+.delete-icon {
+  padding-top: 0;
+  padding-right: 1rem;
+}
+
+.info-button {
+  margin-top: .5rem;
 }
 
 @include small-phone {

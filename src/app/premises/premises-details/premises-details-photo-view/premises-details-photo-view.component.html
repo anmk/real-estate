@@ -1,4 +1,7 @@
 <ng-container>
+  
+  <span *ngIf="image?.description" class="image-description">{{image?.description}}</span>
+
   <div class="outer-img">
     <img *ngIf="image"
       [attr.src]="image.url"
@@ -6,7 +9,16 @@
       width="100%"
       height="100%">
   </div>
+  
   <mat-card-actions *ngIf="image" fxLayoutAlign.xs="center center">
-    <button mat-button routerLink="../../">... Show more info</button>
+    <button mat-button  class="info-button" routerLink="../../">... Show more info</button>
+    <span *ngIf="premises$ | async as premises">
+      <span *ngIf="auth===true && (premises?.userId===user?.uid)">
+        <button mat-icon-button class="icon delete-icon" (click)="delete()">
+          <mat-icon class="press icon">delete</mat-icon>
+        </button>
+      </span>
+    </span>
   </mat-card-actions>
+
 </ng-container>
