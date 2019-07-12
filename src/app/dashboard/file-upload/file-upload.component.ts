@@ -55,7 +55,11 @@ export class FileUploadComponent {
       finalize( async () =>  {
         this.downloadURL = await ref.getDownloadURL().toPromise();
         if (this.downloadURL) {
-          this.premisesService.sharePath(this.downloadURL);
+          const photoData = {
+            url: this.downloadURL,
+            nameInStorage
+          };
+          this.premisesService.sharePath(photoData);
           this.uploadStatus.emit(true);
           this.onUpdateSuccess('Your photo has been uploaded!', '');
           console.log('Your photo has been uploaded! Download URL: ', this.downloadURL);
