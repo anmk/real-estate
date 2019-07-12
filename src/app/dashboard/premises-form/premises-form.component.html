@@ -40,6 +40,9 @@
             <mat-error *ngIf="premisesForm.get('city').getError('minlength') as error">
               This field can have a minimum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
             </mat-error>
+            <mat-error *ngIf="premisesForm.get('city').getError('maxlength') as error">
+              This field can have a maximum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
 
@@ -51,6 +54,9 @@
             </mat-error>
             <mat-error *ngIf="premisesForm.get('street').getError('minlength') as error">
               This field can have a minimum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
+            </mat-error>
+            <mat-error *ngIf="premisesForm.get('street').getError('maxlength') as error">
+              This field can have a maximum of {{ error.requiredLength }} characters. Now has: {{ error.actualLength }}
             </mat-error>
           </mat-form-field>
         </mat-grid-tile>

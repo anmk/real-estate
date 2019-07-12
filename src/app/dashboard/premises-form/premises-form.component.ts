@@ -54,8 +54,8 @@ export class PremisesFormComponent implements OnInit {
     this.premisesForm = this.formBuilder.group({
       premises: ['', [Validators.required] ],
       country: ['Poland'],
-      city: ['', [Validators.required, Validators.minLength(2)] ],
-      street: ['', [Validators.required, Validators.minLength(2)] ],
+      city: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40)] ],
+      street: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)] ],
       streetNumber: ['', [Validators.required, Validators.pattern('[0-9.a-zA-Z]{1,5}')] ],
       flat: ['',  [Validators.pattern('[0-9.a-zA-Z]{1,4}')] ],
       area: ['',  [Validators.pattern('[0-9.]{1,4}')] ],
