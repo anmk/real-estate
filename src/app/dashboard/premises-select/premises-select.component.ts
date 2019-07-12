@@ -3,7 +3,6 @@ import { Observable, Subscription } from 'rxjs';
 import { UserInfo } from 'firebase';
 
 import { Premises, CountriesType, PremisesType, HeatingsType } from '../../shared/models';
-import { AuthService } from '../../core/auth/auth.service';
 import { PremisesService } from '../../services/premises.service';
 import { UserService } from 'src/app/core/user/user.service';
 
@@ -12,7 +11,6 @@ import { UserService } from 'src/app/core/user/user.service';
   templateUrl: './premises-select.component.html',
   styleUrls: ['./premises-select.component.scss']
 })
-
 export class PremisesSelectComponent implements OnDestroy {
   private PREMISES_URL = '/premises';
 
@@ -27,7 +25,6 @@ export class PremisesSelectComponent implements OnDestroy {
   @Output() sharedPremisesId = new EventEmitter();
 
   constructor(private userService: UserService,
-              private authService: AuthService,
               private premisesService: PremisesService) {}
 
   sharePremisesId(): void {
