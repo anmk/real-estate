@@ -1,4 +1,4 @@
-This project uses [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0.
+This project uses [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
 # Real estate
 The project is currently under construction.
 ## Introduction
@@ -88,3 +88,11 @@ Real Estate uses the following open source projects for proper operation:
 :point_right: *View of the contact entered and change of the avatar.* :point_down:
 
 ![desktop15](https://user-images.githubusercontent.com/5839775/60545483-7b4f8e80-9d1b-11e9-81ae-07c221b1f614.jpg)
+
+:point_right: *When the logged-in user selects a previously added photo, the erase option will appear.* :point_down:
+
+![desktop16](https://user-images.githubusercontent.com/5839775/61324261-4f033a00-a812-11e9-98eb-416c0141f4a2.jpg)
+
+:point_right: *Deleting the selected photo.* :point_down:
+
+![desktop17](https://user-images.githubusercontent.com/5839775/61324351-807c0580-a812-11e9-911e-e0b11e10da16.jpg)
