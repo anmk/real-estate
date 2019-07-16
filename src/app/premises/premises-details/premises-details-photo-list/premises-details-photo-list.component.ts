@@ -41,7 +41,7 @@ export class PremisesDetailsPhotoListComponent extends PremisesDetailsComponent 
     );
   }
 
-  getUsers() {
+  private getUsers() {
     this.users$ = this.premisesService.getUsers(this.USERS_URL);
   }
 }
