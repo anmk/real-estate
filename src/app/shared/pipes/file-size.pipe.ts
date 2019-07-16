@@ -6,7 +6,6 @@ const FILE_SIZE_UNITS_LONG = ['Bytes', 'Kilobytes', 'Megabytes', 'Gigabytes', 'P
 @Pipe({
   name: 'fileSize'
 })
-
 export class FileSizePipe implements PipeTransform {
 
   transform(sizeInBytes: number, longForm: boolean): string {
