@@ -14,9 +14,7 @@ import { AuthService } from '../../../core/auth/auth.service';
   templateUrl: './premises-details-photo-view.component.html',
   styleUrls: ['./premises-details-photo-view.component.scss']
 })
-
 export class PremisesDetailsPhotoViewComponent implements OnInit, OnDestroy {
-
   premises$: Observable<Premises>;
   image: Photos;
   private id: string;
@@ -48,13 +46,12 @@ export class PremisesDetailsPhotoViewComponent implements OnInit, OnDestroy {
     });
   }
 
-  private getPremises() {
+  private getPremises(): void {
     this.premises$ = this.premisesService.getPremisesById(this.id);
   }
 
-  delete() {
+  delete(): void {
     this.id = this.activatedRoute.snapshot.parent.url[1].path;
-
     this.deleteSubscription = this.activatedRoute.paramMap.pipe(
       map(params => params.get('pid'))
     )
