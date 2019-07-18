@@ -1,4 +1,4 @@
-This project uses [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
+This project uses [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0.
 # Real estate
 The project is currently under construction.
 ## Introduction
