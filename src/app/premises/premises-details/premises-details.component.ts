@@ -11,7 +11,6 @@ import { Premises } from './../../shared/models';
   templateUrl: './premises-details.component.html',
   styleUrls: ['./premises-details.component.scss']
 })
-
 export class PremisesDetailsComponent implements OnInit {
   premises$: Observable<Premises>;
 
