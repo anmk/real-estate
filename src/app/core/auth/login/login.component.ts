@@ -8,7 +8,6 @@ import { AuthService } from '../auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./../auth.component.scss']
 })
-
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   hide = true;
