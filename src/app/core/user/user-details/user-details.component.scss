@@ -154,6 +154,12 @@ textarea {
   width: 100%;
 }
 
+@include small-phone {
+  .contact-description {
+    display: none;
+  }
+}
+
 @include phone {
   .user-details {
     width: 90%;

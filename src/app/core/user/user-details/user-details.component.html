@@ -50,7 +50,7 @@
               <div fxLayout="row" fxLayoutGap.gt-xs="20px" fxLayoutGap.xs="10px">
                 <span *ngIf="fbUser?.email"><mat-icon class="check-box">check_box</mat-icon></span>
                 <span *ngIf="!fbUser?.email"><mat-icon class="check-box-outline-blank">check_box_outline_blank</mat-icon></span>
-                <span *ngIf="fbUser?.email">E-mail</span>
+                <span *ngIf="fbUser?.email" class="contact-description">E-mail</span>
                 <span *ngIf="fbUser?.email">
                   <mat-card-subtitle class="user-email badge-standard-light">{{ fbUser?.email }}</mat-card-subtitle>
                 </span>
@@ -60,7 +60,7 @@
             <div fxLayout="row" fxLayoutGap.gt-xs="20px" fxLayoutGap.xs="10px">
               <span *ngIf="appUser?.contact"><mat-icon class="check-box">check_box</mat-icon></span>
               <span *ngIf="!appUser?.contact"><mat-icon class="check-box-outline-blank">check_box_outline_blank</mat-icon></span>
-              <span *ngIf="appUser?.contact">Contact 1&#176;</span>
+              <span *ngIf="appUser?.contact" class="contact-description">Contact&nbsp;1&#176;</span>
               <span *ngIf="appUser?.contact">
                 <span class="badge-standard-light">{{ appUser?.contact }}</span>
               </span>
@@ -70,7 +70,7 @@
             <div fxLayout="row" fxLayoutGap.gt-xs="20px" fxLayoutGap.xs="10px">
               <span *ngIf="appUser?.secondContact"><mat-icon class="check-box">check_box</mat-icon></span>
               <span *ngIf="!appUser?.secondContact"><mat-icon class="check-box-outline-blank">check_box_outline_blank</mat-icon></span>
-              <span *ngIf="appUser?.secondContact">Contact 2&#176;</span>
+              <span *ngIf="appUser?.secondContact" class="contact-description">Contact&nbsp;2&#176;</span>
               <span *ngIf="appUser?.secondContact">
                 <span class="badge-standard-light">{{ appUser?.secondContact }}</span>
               </span>
@@ -84,7 +84,7 @@
                 <span *ngIf="appUser?.userInfo">Owner Info</span>
                 <span *ngIf="!appUser?.userInfo">You can add information about yourself in edit mode.</span>
               </div>
-              <div *ngIf="appUser?.userInfo" class="user-info scrool-window-----">{{ appUser?.userInfo }}</div>
+              <div *ngIf="appUser?.userInfo" class="user-info">{{ appUser?.userInfo }}</div>
             </div>
 
             <div>
