@@ -34,8 +34,8 @@ export class UserService {
       .then(() => this.afs.doc(`users/${user.uid}`).update({displayName, photoURL}))
       .then(() => this.onUpdateSuccess('Your profile has been updated!', ''))
       .then(() => console.log('Your profile has been updated - displayName:', displayName, 'photoURL: ', photoURL ))
-      .catch((error) => this.onUpdateFailure(error.message, ''))
-      .catch((error) => console.log(error.message));
+      .catch((error: Error) => this.onUpdateFailure(error.message, ''))
+      .catch((error: Error) => console.log(error.message));
   }
 
   updateUserEmail(email: string) {
@@ -44,32 +44,32 @@ export class UserService {
       .then(() => this.afs.doc(`users/${user.uid}`).update({email}))
       .then(() => this.onUpdateSuccess('Your email has been succesfully updated to: ', email))
       .then(() => console.log('Your email has been updated to: ', email))
-      .catch((error) => this.onUpdateFailure(error.message, ''))
-      .catch((error) => console.log(error.message));
+      .catch((error: Error) => this.onUpdateFailure(error.message, ''))
+      .catch((error: Error) => console.log(error.message));
   }
 
   updateAppUserContact(contact: string) {
     return this.afs.doc(`users/${this.fbUser.uid}`).update({contact})
     .then(() => this.onUpdateSuccess('Contact has been updated to: ', contact))
     .then(() => console.log('Contact has been updated to: ', contact))
-    .catch((error) => this.onUpdateFailure(error.message, ''))
-    .catch((error) => console.log(error.message));
+    .catch((error: Error) => this.onUpdateFailure(error.message, ''))
+    .catch((error: Error) => console.log(error.message));
   }
 
   updateAppUserSecondContact(secondContact: string) {
     return this.afs.doc(`users/${this.fbUser.uid}`).update({secondContact})
     .then(() => this.onUpdateSuccess('Your second contact has been changed to: ', secondContact))
     .then(() => console.log('Your second contact has been updated to: ', secondContact))
-    .catch((error) => this.onUpdateFailure(error.message, ''))
-    .catch((error) => console.log(error.message));
+    .catch((error: Error) => this.onUpdateFailure(error.message, ''))
+    .catch((error: Error) => console.log(error.message));
   }
 
   updateAppUserInfo(userInfo: string) {
     return this.afs.doc(`users/${this.fbUser.uid}`).update({userInfo})
     .then(() => this.onUpdateSuccess('Your informations has been succesfully saved!', ''))
     .then(() => console.log('Your informations has been updated to: ', userInfo))
-    .catch((error) => this.onUpdateFailure(error.message, ''))
-    .catch((error) => console.log(error.message));
+    .catch((error: Error) => this.onUpdateFailure(error.message, ''))
+    .catch((error: Error) => console.log(error.message));
   }
 
   private onUpdateSuccess(info: string, additionalInfo: string): void {
