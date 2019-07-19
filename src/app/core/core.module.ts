@@ -18,5 +18,4 @@ import { UserModule } from './user/user.module';
     PremisesService
   ],
 })
-
 export class CoreModule { }
