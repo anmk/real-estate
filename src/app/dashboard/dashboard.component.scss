@@ -13,7 +13,13 @@ button {
 .confirmed-info {
   @include info-box();
   left: 1rem;
-  transform: translateY(-9.5rem);
+  transform: translateY(-12.7rem);
+}
+
+.delete-info {
+  @extend .confirmed-info;
+  color: $error-color;
+  border: 2px solid $error-color;
 }
 
 .thumbnail-info {
@@ -26,10 +32,14 @@ button {
   margin-bottom: 2rem;
 }
 
+.bottom-del {
+  margin-bottom: 7rem;
+}
+
 @include phone {
   .local-info-basis {
-    @include info-box(80%);
-    left: 9%;
+    @include info-box(90%);
+    left: 5%;
   }
   .confirmed-info {
     display: none;
@@ -41,5 +51,9 @@ button {
   .thumbnail-info {
     @extend .local-info-basis;
     transform: translateY(8.5rem);
+  }
+  .delete-info {
+    @extend .local-info-basis;
+    transform: translateY(3rem);
   }
 }
