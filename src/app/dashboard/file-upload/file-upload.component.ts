@@ -1,8 +1,8 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import { PremisesService } from '../../services/premises.service';
@@ -12,8 +12,7 @@ import { PremisesService } from '../../services/premises.service';
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })
-
-export class FileUploadComponent {
+export class FileUploadComponent implements OnInit, OnDestroy {
   @Input() premisesIdToPhoto: string;
   @Input() premisesForm: FormGroup;
   @Output() uploadStatus = new EventEmitter();
@@ -23,10 +22,16 @@ export class FileUploadComponent {
   snapshot: Observable<any>;
   downloadURL: string;
   isHovering: boolean;
+  buttonStatus: boolean;
+  private buttonStatusSubscription: Subscription;
 
   constructor(private storage: AngularFireStorage,
               private premisesService: PremisesService,
               private matSnackBarToast: MatSnackBar) { }
+
+  ngOnInit() {
+    this.getButtonStatus();
+  }
 
   toggleHover(event: boolean): void {
     this.isHovering = (this.premisesIdToPhoto || this.premisesForm) ? event : false;
@@ -76,6 +81,13 @@ export class FileUploadComponent {
     return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
   }
 
+  private getButtonStatus(): void {
+    this.buttonStatusSubscription = this.premisesService.buttonStatusSource$
+      .subscribe( status => {
+        this.buttonStatus = status;
+    });
+  }
+
   private onUpdateSuccess(info: string, additionalInfo: string): void {
     this.matSnackBarToast.open(info, additionalInfo, { panelClass: 'toast-success' });
     // console.log(info);
@@ -86,4 +98,9 @@ export class FileUploadComponent {
     // console.error(info);
   }
 
+  ngOnDestroy(): void {
+    if (this.buttonStatusSubscription) {
+      this.buttonStatusSubscription.unsubscribe();
+    }
+  }
 }
