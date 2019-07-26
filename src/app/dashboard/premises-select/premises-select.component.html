@@ -45,7 +45,7 @@
       <ng-container>
         <div *ngIf="premise.userId===user.uid" class="container-element selected-element">
           <mat-radio-group required [(ngModel)]="chosenPremises" #formRef="ngModel" name="chosenPremises">
-            <mat-radio-button class="md-primary inner-element" [value]="premise.id">
+            <mat-radio-button class="md-primary inner-element" [value]="premise.id" [disabled]="buttonStatus">
             </mat-radio-button>
           </mat-radio-group>
         </div>
@@ -63,36 +63,47 @@
       <button mat-raised-button 
         type="submit"
         color="primary"
-        [disabled]="formRef?.invalid || !chosenPremises">
+        [disabled]="formRef?.invalid || !chosenPremises || buttonStatus">
         Confirm
       </button>
     </div>
   </form>
 
   <div>
-    <div fxLayoutAlign="center center" [ngClass]="{'info-circle-outline': chosenPremises}" class="info-circle">
-      <p>or</p>
+    <div fxLayoutAlign="center center" 
+      [ngClass]="{'info-circle-outline': (chosenPremises && !buttonStatus)}" 
+      class="info-circle">
+        <p>or</p>
     </div>
 
     <div fxLayoutAlign="center center" class="info-button">
       <button mat-raised-button 
         color="primary"
-        [disabled]="formRef?.invalid || !chosenPremises"
+        [disabled]="formRef?.invalid || !chosenPremises || buttonStatus"
         (click)="confirmationSelectedPremises()">
         Show more info
       </button>
     </div>
     
+    <div fxLayoutAlign="center center" class="info-button">
+      <button mat-raised-button 
+        color="primary"
+        [disabled]="!chosenPremises || !buttonStatus"
+        (click)="changePremises()">
+        Change premises
+      </button>
+    </div>
+
     <div *ngIf="premisesData" class="more-info">
       <table>
-          <tr><td>
-            Address: {{ premisesData?.streetNumber }}/{{ premisesData?.flat }} 
-            {{ premisesData?.street }}, {{ premisesData?.city }}, {{ premisesData?.country }}
-          </td></tr>
-          <tr><td>
-            Premises type:&nbsp;{{ premisesData?.premises }}
-          </td></tr>
-        </table>
+        <tr><td>
+          Address: {{ premisesData?.streetNumber }}/{{ premisesData?.flat }} 
+          {{ premisesData?.street }}, {{ premisesData?.city }}, {{ premisesData?.country }}
+        </td></tr>
+        <tr><td>
+          Premises type:&nbsp;{{ premisesData?.premises }},&nbsp;Photos:&nbsp;{{ numberOfPhotos }}
+        </td></tr>
+      </table>
     </div>
   </div>
 </section>
