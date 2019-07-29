@@ -1,10 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 import { PremisesService } from '../services/premises.service';
-import { Photos } from '../shared/models';
+import { Photos, Premises } from '../shared/models';
 import { UserService } from '../core/user/user.service';
 
 @Component({
@@ -12,22 +12,33 @@ import { UserService } from '../core/user/user.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
   private imageUrls: Photos;
   uploadStatus: boolean;
   premisesForm: FormGroup;
   premisesIdToPhoto: string;
   addPhotosActive = false;
+  premise$: Observable<Premises>;
+  photos$: Observable<Photos[]>;
+  numberOfPhotos: number;
+  buttonStatus: boolean;
   private thumbnailSubscription: Subscription;
   private photoSubscription: Subscription;
+  private deleteSubscription: Subscription;
+  numberOfPhotoSubscription: Subscription;
+  private buttonStatusSubscription: Subscription;
 
-  constructor(private userService: UserService,
-              private premisesService: PremisesService,
-              private matSnackBarToast: MatSnackBar) { }
+  constructor(protected userService: UserService,
+              protected premisesService: PremisesService,
+              protected matSnackBarToast: MatSnackBar) { }
+
+ngOnInit() {
+  this.getButtonStatus();
+}
 
   onSharedPremisesId(premisesId: string): void {
     this.premisesIdToPhoto = premisesId;
+    this.checkPhotos(this.premisesIdToPhoto);
   }
 
   onShownPremisesForm(premisesForm: FormGroup): void {
@@ -52,6 +63,28 @@ export class DashboardComponent implements OnDestroy {
       .then(this.onPhotoLinkSuccess.bind(this), this.onPhotoLinkFailure.bind(this));
   }
 
+  deletePremises() {
+    this.getPremises();
+    this.checkPhotos(this.premisesIdToPhoto);
+    this.deleteSubscription = this.premise$.subscribe((premisesData => {
+      if (premisesData) {
+        this.premisesService.deletePremises(this.premisesIdToPhoto, premisesData.thumbnail.nameInStorage);
+        this.premisesIdToPhoto = null;
+      }
+      }));
+  }
+
+  checkPhotos(premiseId: string): void {
+    this.photos$ = this.premisesService.getImages(`/premises/${premiseId}/imageUrls`);
+    this.numberOfPhotoSubscription = this.photos$.subscribe(images => {
+      this.numberOfPhotos = images.length;
+    });
+  }
+
+  private getPremises() {
+    this.premise$ = this.premisesService.getPremisesById(this.premisesIdToPhoto);
+  }
+
   private getThumbnailPath(): void {
     this.thumbnailSubscription = this.premisesService.pathToPremisesSource$
       .subscribe((photoData => {
@@ -70,6 +103,13 @@ export class DashboardComponent implements OnDestroy {
     this.getPhotoPath();
     this.addPhotosActive = ((this.premisesIdToPhoto !== null) &&
       (this.imageUrls.url !== null) && (uploadStatus !== false)) ? true : false;
+  }
+
+  getButtonStatus(): void {
+    this.buttonStatusSubscription = this.premisesService.buttonStatusSource$
+      .subscribe( status => {
+        this.buttonStatus = status;
+    });
   }
 
   private onPremisesSuccess(): void {
@@ -98,6 +138,15 @@ export class DashboardComponent implements OnDestroy {
     }
     if (this.photoSubscription) {
       this.photoSubscription.unsubscribe();
+    }
+    if (this.numberOfPhotoSubscription) {
+      this.numberOfPhotoSubscription.unsubscribe();
+    }
+    if (this.deleteSubscription) {
+      this.deleteSubscription.unsubscribe();
+    }
+    if (this.buttonStatusSubscription) {
+      this.buttonStatusSubscription.unsubscribe();
     }
   }
 

@@ -39,9 +39,10 @@
       <span>You confirmed this: "{{ premisesIdToPhoto }}" premises id. 
         Now you can send a photo to the cloud.</span>
     </div>
+
     <div class="">
     <app-file-upload
-      [premisesIdToPhoto]="premisesIdToPhoto" 
+      [premisesIdToPhoto]="premisesIdToPhoto"
       (uploadStatus)="onStatus($event)">
     </app-file-upload>
   </div>
@@ -59,5 +60,38 @@
     </div>
     <div class="bottom">
     </div>
+  </mat-tab>
+
+  <mat-tab label="Delete premises">
+    <app-user-info
+      [hint]="'Choose the place you want to delete.'">
+    </app-user-info>
+    <app-premises-select 
+      (sharedPremisesId)="onSharedPremisesId($event)">
+    </app-premises-select>
+    <div *ngIf="(premisesIdToPhoto && (numberOfPhotos < 1))" class="confirmed-info">
+      <span>You confirmed this: "{{ premisesIdToPhoto }}" premises id. 
+      Now you can delete a premises.</span>
+    </div>
+   
+    <div *ngIf="(premisesIdToPhoto && (numberOfPhotos > 0))" class="delete-info">
+      <span>You confirmed this: "{{ premisesIdToPhoto }}" premises id. 
+        The premises selected for deletion contains {{ numberOfPhotos }} photos. 
+        To delete this place, first delete all photos in this premises. 
+        You can do it as a logged in user in the premises view.
+      </span>
+    </div>
+
+    <div fxLayoutAlign="center center"> 
+      <button mat-raised-button
+        color="primary"
+        [disabled]="!premisesIdToPhoto || (numberOfPhotos > 0) || !buttonStatus"
+        (click)="deletePremises()">
+        Delete Premises
+      </button>
+    </div>
+    <div class="bottom-del">
+    </div>
+
   </mat-tab>
 </mat-tab-group>

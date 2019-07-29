@@ -109,9 +109,9 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
               this.userService.updateUserProfile(this.fbUser.displayName, downloadURL);
               console.log('downloadURL: ', downloadURL);
             })
-            .catch((error) => console.log(error.message));
+            .catch((error: Error) => console.log(error.message));
         })
-        .catch((error) => console.log(error.message));
+        .catch((error: Error) => console.log(error.message));
     }
   }
 
@@ -120,4 +120,5 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       this.userSubscription.unsubscribe();
     }
   }
+
 }

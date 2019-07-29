@@ -51,6 +51,7 @@
     [class.hovering]="isHovering">
     <h3>Photo Drop Zone</h3>
     <p>Drag and Drop or choose a file…</p>
+ 
     <div class="file">
       <label class="file-label">
         <span>
@@ -58,7 +59,7 @@
             type="button" 
             (click)="featuredInput.click()" 
             color="primary"
-            [disabled]="!(premisesIdToPhoto || premisesForm)">
+            [disabled]="!((premisesIdToPhoto || premisesForm) && buttonStatus)">
             Choose a file
           </button>
           <input #featuredInput 

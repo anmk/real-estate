@@ -57,5 +57,4 @@ const MATERIAL_MODULES = [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: MAT_SNACK_BAR_GLOBAL_CONFIG }
   ]
 })
-
 export class MaterialModule { }

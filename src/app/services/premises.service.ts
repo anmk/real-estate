@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { MatSnackBar } from '@angular/material';
 import { Observable, Subject, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Premises, Photos, CountriesType, HeatingsType, PremisesType } from './../shared/models';
 import { User } from '../core/user/user-data.model';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { MatSnackBar } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,7 @@ export class PremisesService {
 
   selectedPremisesId$ = new Subject<string>();
   premisesDetailsSource$ = new Subject<Premises>();
+  buttonStatusSource$ = new Subject<boolean>();
   pathToPremisesSource$ = new ReplaySubject<Photos>();
   premisesDoc: AngularFirestoreDocument<Premises>;
   premisesUrls: AngularFirestoreDocument<[]>;
@@ -25,6 +26,7 @@ export class PremisesService {
   pathToPremises: string;
   user: Observable<Premises>;
   userDoc: AngularFirestoreDocument<Premises>;
+  radioButtonStatus = false;
 
   constructor(private afs: AngularFirestore,
               private storage: AngularFireStorage,
@@ -86,6 +88,11 @@ export class PremisesService {
     return this.selectedPremisesId$.asObservable();
   }
 
+  shareButtonStatusSource(buttonStatus: boolean) {
+    this.buttonStatusSource$.next(buttonStatus);
+    return this.buttonStatusSource$.asObservable();
+  }
+
   sharePath(photoData: Photos): void {
     this.pathToPremisesSource$.next(photoData);
   }
@@ -101,9 +108,21 @@ export class PremisesService {
       // Delete from database
       this.afs.doc(`premises/${id}/imageUrls/${pid}`).delete()
       .then(() => this.onUpdateSuccess('Image has been deleted!', ''))
-      .catch((error) => this.onUpdateFailure(error.message, ''))
+      .catch((error: Error) => this.onUpdateFailure(error.message, ''))
     )
-    .catch((error) => this.onUpdateFailure(error.message, ''));
+    .catch((error: Error) => this.onUpdateFailure(error.message, ''));
+  }
+
+  deletePremises(id: string, name: string) {
+    // Delete from storage
+    this.storage.ref('premisesPhotos').child(name).delete().toPromise()
+    .then(
+      // Delete from database
+      this.afs.doc(`premises/${id}`).delete()
+      .then(() => this.onUpdateSuccess('Premises has been deleted!', ''))
+      .catch((error: Error) => this.onUpdateFailure(error.message, ''))
+    )
+    .catch((error: Error) => this.onUpdateFailure(error.message, ''));
   }
 
   private onUpdateSuccess(info: string, additionalInfo: string): void {

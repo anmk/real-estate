@@ -44,5 +44,4 @@ import 'hammerjs';
   ],
   bootstrap: [AppComponent]
 })
-
 export class AppModule { }

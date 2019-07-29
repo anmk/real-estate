@@ -65,8 +65,8 @@ button {
     height: 4rem;
   }
   .transfer-info {
-    @include info-box(80%);
-    left: 9%;
-    transform: translateY(-2.5rem);
+    @include info-box(90%);
+    left: 5%;
+    transform: translateY(-2rem);
   }
 }

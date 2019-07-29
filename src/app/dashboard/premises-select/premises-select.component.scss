@@ -69,7 +69,7 @@ button {
   @include info-box();
   right: 1rem;
   padding-left: .1rem;
-  transform: translateY(-6.5rem);
+  transform: translateY(-7.5rem);
 }
 
 .info-button {
@@ -95,7 +95,7 @@ button {
     display: none;
   }
   .more-info {
-    transform: translateY(-7rem);
+    transform: translateY(-10.3rem);
   }
 }
 
@@ -104,8 +104,6 @@ button {
     flex: 4;  
   }
   .more-info {
-    transform: translateY(-6.5rem);
+    transform: translateY(-9.9rem);
   }
 }
-
-
