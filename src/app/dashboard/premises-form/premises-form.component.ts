@@ -18,6 +18,7 @@ export class PremisesFormComponent implements OnInit {
   premisesForm: FormGroup;
   breakpoint: number;
   tableRowsHeight: number;
+  buttonStatus = false;
   countriesType$: Observable<Premises[] | PremisesType[] | HeatingsType[] | CountriesType[]> =
     this.premisesService.getPremises(this.COUNTRIES_TYPE_URL);
   premisesType$: Observable<Premises[] | PremisesType[] | HeatingsType[] | CountriesType[]> =
@@ -34,6 +35,7 @@ export class PremisesFormComponent implements OnInit {
     this.buildPremisesForm();
     this.showPremisesForm();
     this.setTablePropertiesOnInit();
+    this.onFormChanges();
   }
 
   setTablePropertiesOnResize(event) {
@@ -68,6 +70,23 @@ export class PremisesFormComponent implements OnInit {
 
   private showPremisesForm(): void {
     this.shownPremisesForm.emit(this.premisesForm);
+  }
+
+  private onFormChanges(): void {
+    this.premisesForm.statusChanges
+      .subscribe(val => {
+        if (val === 'VALID') {
+          this.buttonStatus = true;
+          this.shareButtonStatus();
+        } else {
+          this.buttonStatus = false;
+          this.shareButtonStatus();
+        }
+      });
+  }
+
+  private shareButtonStatus(): void {
+    this.premisesService.shareButtonStatusSource(this.buttonStatus);
   }
 
 }
