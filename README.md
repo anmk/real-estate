@@ -1,4 +1,4 @@
-This project uses [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0.
+This project uses [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
 # Real estate
 The project is currently under construction.
 ## Introduction
@@ -26,6 +26,7 @@ Real Estate uses the following open source projects for proper operation:
 ![mobile02a](https://user-images.githubusercontent.com/5839775/59637788-f24f2980-9156-11e9-8d9c-0eba307d7352.jpg)
 ![mobile03a](https://user-images.githubusercontent.com/5839775/59637813-fd09be80-9156-11e9-86b3-21c94a98d108.jpg)
 ![mobile04](https://user-images.githubusercontent.com/5839775/60545322-201d9c00-9d1b-11e9-9500-927d92192026.jpg)
+![mobile05](https://user-images.githubusercontent.com/5839775/62244524-e4d8c080-b3df-11e9-9e6d-8d0cf224a335.jpg)
 ### :computer: Desktop: 
 **Different views from the desktop.**  
 
@@ -96,3 +97,15 @@ Real Estate uses the following open source projects for proper operation:
 :point_right: *Deleting the selected photo.* :point_down:
 
 ![desktop17](https://user-images.githubusercontent.com/5839775/61324351-807c0580-a812-11e9-911e-e0b11e10da16.jpg)
+
+:point_right: *View of the "Delete premises" tab.* :point_down:
+
+![desktop18](https://user-images.githubusercontent.com/5839775/62244600-0c2f8d80-b3e0-11e9-8eba-50ec78845911.jpg)
+
+:point_right: *Information about the number of photos of the premises and about the need to remove photos before deleting the premises.* :point_down:
+
+![desktop19](https://user-images.githubusercontent.com/5839775/62244612-1487c880-b3e0-11e9-89aa-2f9e390d38b7.jpg)
+
+:point_right: *Removal of premises after deleting photos.* :point_down:
+
+![desktop20](https://user-images.githubusercontent.com/5839775/62244623-194c7c80-b3e0-11e9-8538-46212f549fc3.jpg)
