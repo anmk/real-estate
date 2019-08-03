@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 
 import { Premises, Photos, CountriesType, HeatingsType, PremisesType } from './../shared/models';
 import { User } from '../core/user/user-data.model';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,10 @@ export class PremisesService {
   private PREMISES_URL = '/premises';
 
   selectedPremisesId$ = new Subject<string>();
-  premisesDetailsSource$ = new Subject<Premises>();
+  premisesDetailsSource$ = new ReplaySubject<Premises>();
   buttonStatusSource$ = new Subject<boolean>();
   pathToPremisesSource$ = new ReplaySubject<Photos>();
+  premisesFormSource$ = new Subject<FormGroup>();
   premisesDoc: AngularFirestoreDocument<Premises>;
   premisesUrls: AngularFirestoreDocument<[]>;
   photoDoc: AngularFirestoreDocument<Photos>;
@@ -26,7 +28,6 @@ export class PremisesService {
   pathToPremises: string;
   user: Observable<Premises>;
   userDoc: AngularFirestoreDocument<Premises>;
-  radioButtonStatus = false;
 
   constructor(private afs: AngularFirestore,
               private storage: AngularFireStorage,
@@ -73,14 +74,25 @@ export class PremisesService {
     return this.afs.collection<Premises[]>(this.PREMISES_URL).add(premises);
   }
 
+  updatePremises(premises: Premises[], premisesId: string) {
+    return this.afs.collection<Premises[]>(this.PREMISES_URL).doc(premisesId).update(premises)
+    .then(() => this.onUpdateSuccess('Premises has been updated!', ''))
+    .catch((error: Error) => this.onUpdateFailure(error.message, ''));
+  }
+
   addPhotos(photos: Photos, premisesId: string) {
-    return this.afs.collection<Photos>('premises').doc(premisesId)
+    return this.afs.collection<Photos>(this.PREMISES_URL).doc(premisesId)
       .collection('imageUrls').add(photos);
   }
 
   premisesDetailsInfo(premises: Premises) {
     this.premisesDetailsSource$.next(premises);
     return this.premisesDetailsSource$.asObservable();
+  }
+
+  premisesFormInfo(premisesForm: FormGroup) {
+    this.premisesFormSource$.next(premisesForm);
+    return this.premisesFormSource$.asObservable();
   }
 
   shareSelectedPremisesId(premisesId: string) {
