@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { FormGroup } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
@@ -6,6 +6,7 @@ import { Subscription, Observable } from 'rxjs';
 import { PremisesService } from '../services/premises.service';
 import { Photos, Premises } from '../shared/models';
 import { UserService } from '../core/user/user.service';
+import { PremisesFormComponent } from './premises-form/premises-form.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,28 +14,35 @@ import { UserService } from '../core/user/user.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+  @ViewChild('editPremisesRef', {static: false}) editPremisesRef: PremisesFormComponent;
+
   private imageUrls: Photos;
   uploadStatus: boolean;
   premisesForm: FormGroup;
   premisesIdToPhoto: string;
   addPhotosActive = false;
   premise$: Observable<Premises>;
+  premisesDataUpdate: Premises;
   photos$: Observable<Photos[]>;
   numberOfPhotos: number;
   buttonStatus: boolean;
   private thumbnailSubscription: Subscription;
   private photoSubscription: Subscription;
   private deleteSubscription: Subscription;
-  numberOfPhotoSubscription: Subscription;
+  private numberOfPhotoSubscription: Subscription;
   private buttonStatusSubscription: Subscription;
 
   constructor(protected userService: UserService,
               protected premisesService: PremisesService,
               protected matSnackBarToast: MatSnackBar) { }
 
-ngOnInit() {
-  this.getButtonStatus();
-}
+  ngOnInit() {
+    this.getButtonStatus();
+  }
+
+  updatePremises() {
+    this.editPremisesRef.editPremises();
+  }
 
   onSharedPremisesId(premisesId: string): void {
     this.premisesIdToPhoto = premisesId;
@@ -114,22 +122,22 @@ ngOnInit() {
 
   private onPremisesSuccess(): void {
     this.matSnackBarToast.open('Premises has been succesfully created!', '', { panelClass: 'toast-success' });
-    console.log('success');
+    // console.log('success');
   }
 
   private onPremisesFailure(error: Error): void {
     this.matSnackBarToast.open(error.message, '', { panelClass: 'toast-error' });
-    console.error('some error');
+    // console.error('some error');
   }
 
   private onPhotoLinkSuccess(): void {
     this.matSnackBarToast.open('Image has been succesfully added!', '', { panelClass: 'toast-success' });
-    console.log('success');
+    // console.log('success');
   }
 
   private onPhotoLinkFailure(error: Error): void {
     this.matSnackBarToast.open(error.message, '', { panelClass: 'toast-error' });
-    console.error('some error');
+    // console.error('some error');
   }
 
   ngOnDestroy(): void {

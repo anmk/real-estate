@@ -3,17 +3,28 @@
     <app-user-info
       [hint]="'Add a new place.'">
     </app-user-info>
-    <app-premises-form
-      (shownPremisesForm)="onShownPremisesForm($event)">
-    </app-premises-form>
-    <div *ngIf="premisesForm.valid" class="thumbnail-info">
-      <span>To create a premises you need to add a thumbnail.</span>
+
+    <div *ngIf="premisesIdToPhoto" class="warn-info">
+      <span>To create a new premises you need to click a "Change Premises" button in "Edit Premises" tab.</span>
     </div>
-    <app-file-upload 
+    
+      <div *ngIf="!premisesIdToPhoto">
+        <app-premises-form
+          (shownPremisesForm)="onShownPremisesForm($event)">
+        </app-premises-form>
+      </div>
+
+    <div *ngIf="!premisesIdToPhoto">
+      <div *ngIf="premisesForm.valid" class="thumbnail-info">
+        <span>To create a premises you need to add a thumbnail.</span>
+      </div>
+    </div>
+
+    <app-file-upload
       [premisesIdToPhoto]="premisesIdToPhoto" 
-      (uploadStatus)="onStatus($event)"
-      [premisesForm]="premisesForm.valid">
+      (uploadStatus)="onStatus($event)">
     </app-file-upload>
+
     <div fxLayoutAlign="center center">
       <button 
         mat-raised-button 
@@ -24,6 +35,7 @@
         Create Premises
       </button>
     </div>
+    
     <div class="bottom">
     </div>
   </mat-tab>
@@ -32,23 +44,27 @@
     <app-user-info
       [hint]="'Choose the place you want to add photos to.'">
     </app-user-info>
+
     <app-premises-select 
       (sharedPremisesId)="onSharedPremisesId($event)">
     </app-premises-select>
+    
     <div *ngIf="premisesIdToPhoto" class="confirmed-info">
       <span>You confirmed this: "{{ premisesIdToPhoto }}" premises id. 
         Now you can send a photo to the cloud.</span>
     </div>
 
     <div class="">
-    <app-file-upload
-      [premisesIdToPhoto]="premisesIdToPhoto"
-      (uploadStatus)="onStatus($event)">
-    </app-file-upload>
-  </div>
+      <app-file-upload
+        [premisesIdToPhoto]="premisesIdToPhoto"
+        (uploadStatus)="onStatus($event)">
+      </app-file-upload>
+    </div>
+
     <div *ngIf="addPhotosActive && premisesIdToPhoto" class="chosen-premises-info">
       <span>Now you can add the sent photo to the application.</span>
     </div>
+    
     <div fxLayoutAlign="center center"> 
       <button mat-raised-button
         color="primary"
@@ -58,7 +74,42 @@
         Add Photo
       </button>
     </div>
+    
     <div class="bottom">
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Edit premises">
+    <app-user-info
+      [hint]="'Choose the place you want to edit.'">
+    </app-user-info>
+
+    <app-premises-select 
+      (sharedPremisesId)="onSharedPremisesId($event)">
+    </app-premises-select>
+    
+    <div *ngIf="premisesIdToPhoto" class="confirmed-info">
+      <span>You confirmed this: "{{ premisesIdToPhoto }}" premises id. 
+      Now you can edit a premises.</span>
+    </div>
+
+    <div *ngIf="premisesIdToPhoto">
+      <app-premises-form #editPremisesRef
+        (shownPremisesForm)="onShownPremisesForm($event)"
+        [premisesIdToPhoto]="premisesIdToPhoto">
+      </app-premises-form>
+    </div>
+
+    <div fxLayoutAlign="center center"> 
+      <button mat-raised-button
+        color="primary"
+        [disabled]="!premisesIdToPhoto || !buttonStatus"
+        (click)="updatePremises()">
+        Update Premises
+      </button>
+    </div>
+
+    <div class="bottom-del">
     </div>
   </mat-tab>
 
@@ -66,9 +117,11 @@
     <app-user-info
       [hint]="'Choose the place you want to delete.'">
     </app-user-info>
+
     <app-premises-select 
       (sharedPremisesId)="onSharedPremisesId($event)">
     </app-premises-select>
+    
     <div *ngIf="(premisesIdToPhoto && (numberOfPhotos < 1))" class="confirmed-info">
       <span>You confirmed this: "{{ premisesIdToPhoto }}" premises id. 
       Now you can delete a premises.</span>
@@ -90,8 +143,8 @@
         Delete Premises
       </button>
     </div>
+
     <div class="bottom-del">
     </div>
-
   </mat-tab>
 </mat-tab-group>

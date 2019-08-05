@@ -10,6 +10,13 @@ button {
   right: 1rem;
 }
 
+.warn-info {
+  @include info-box();
+  left: 1rem;
+  color: $error-color;
+  border: 2px solid $error-color;
+}
+
 .confirmed-info {
   @include info-box();
   left: 1rem;
@@ -17,9 +24,8 @@ button {
 }
 
 .delete-info {
-  @extend .confirmed-info;
-  color: $error-color;
-  border: 2px solid $error-color;
+  @extend .warn-info;
+  transform: translateY(-12.7rem);
 }
 
 .thumbnail-info {
