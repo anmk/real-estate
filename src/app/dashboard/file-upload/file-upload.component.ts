@@ -14,7 +14,6 @@ import { PremisesService } from '../../services/premises.service';
 })
 export class FileUploadComponent implements OnInit, OnDestroy {
   @Input() premisesIdToPhoto: string;
-  @Input() premisesForm: FormGroup;
   @Output() uploadStatus = new EventEmitter();
 
   task: AngularFireUploadTask;
@@ -23,7 +22,9 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   downloadURL: string;
   isHovering: boolean;
   buttonStatus: boolean;
+  premisesForm: FormGroup;
   private buttonStatusSubscription: Subscription;
+  private premisesFormInfoSubscription: Subscription;
 
   constructor(private storage: AngularFireStorage,
               private premisesService: PremisesService,
@@ -31,17 +32,18 @@ export class FileUploadComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getButtonStatus();
+    this.getPremisesFormInfo();
   }
 
   toggleHover(event: boolean): void {
-    this.isHovering = (this.premisesIdToPhoto || this.premisesForm) ? event : false;
+    this.isHovering = (this.premisesIdToPhoto || this.premisesForm.valid) ? event : false;
   }
 
   startUpload(event: FileList) {
     const file = event.item(0);
     const fileType = file.type.split('/')[0];
 
-    if ((fileType !== 'image') || (!this.premisesIdToPhoto) && (!this.premisesForm)) {
+    if ((fileType !== 'image') || (!this.premisesIdToPhoto) && (!this.premisesForm.valid)) {
       console.error('Unsupported file type or missing premises id or form data :( ');
       return alert('Unsupported file type or missing premises id or form data :( ');
     }
@@ -88,6 +90,13 @@ export class FileUploadComponent implements OnInit, OnDestroy {
     });
   }
 
+  private getPremisesFormInfo(): void {
+    this.premisesFormInfoSubscription = this.premisesService.premisesFormSource$
+      .subscribe( info => {
+        this.premisesForm = info;
+    });
+  }
+
   private onUpdateSuccess(info: string, additionalInfo: string): void {
     this.matSnackBarToast.open(info, additionalInfo, { panelClass: 'toast-success' });
     // console.log(info);
@@ -101,6 +110,9 @@ export class FileUploadComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.buttonStatusSubscription) {
       this.buttonStatusSubscription.unsubscribe();
+    }
+    if (this.premisesFormInfoSubscription) {
+      this.premisesFormInfoSubscription.unsubscribe();
     }
   }
 }
