@@ -22,7 +22,7 @@ export class PremisesSelectComponent extends DashboardComponent implements OnDes
   user: UserInfo = this.userService.currentUser;
   premises$: Observable<Premises[] | PremisesType[] | HeatingsType[] | CountriesType[]> =
     this.premisesService.getPremises(this.PREMISES_URL);
-  private dataSubscription: Subscription;
+  private selectedSubscription: Subscription;
 
   @Output() sharedPremisesId = new EventEmitter();
 
@@ -39,10 +39,11 @@ export class PremisesSelectComponent extends DashboardComponent implements OnDes
   }
 
   confirmationSelectedPremises(): void {
-    this.dataSubscription = null;
-    this.dataSubscription = this.premisesService.getPremisesById(this.chosenPremises)
+    this.selectedSubscription = null;
+    this.selectedSubscription = this.premisesService.getPremisesById(this.chosenPremises)
       .subscribe(premises => {
         this.premisesData = premises;
+        this.premisesService.premisesDetailsInfo(premises);
       });
     this.checkPhotos(this.chosenPremises);
   }
@@ -52,6 +53,7 @@ export class PremisesSelectComponent extends DashboardComponent implements OnDes
     this.sharedPremisesId.emit(null);
     this.checkButton();
   }
+
   checkButton() {
     this.buttonStatus = !this.buttonStatus;
     this.shareButtonStatus();
@@ -62,8 +64,8 @@ export class PremisesSelectComponent extends DashboardComponent implements OnDes
   }
 
   ngOnDestroy(): void {
-    if (this.dataSubscription) {
-      this.dataSubscription.unsubscribe();
+    if (this.selectedSubscription) {
+      this.selectedSubscription.unsubscribe();
     }
   }
 
