@@ -27,6 +27,8 @@ Real Estate uses the following open source projects for proper operation:
 ![mobile03a](https://user-images.githubusercontent.com/5839775/59637813-fd09be80-9156-11e9-86b3-21c94a98d108.jpg)
 ![mobile04](https://user-images.githubusercontent.com/5839775/60545322-201d9c00-9d1b-11e9-9500-927d92192026.jpg)
 ![mobile05](https://user-images.githubusercontent.com/5839775/62244524-e4d8c080-b3df-11e9-9e6d-8d0cf224a335.jpg)
+![mobile06](https://user-images.githubusercontent.com/5839775/65336683-1cd1d800-dbc7-11e9-909b-dda7d4d18aeb.jpg)
+
 ### :computer: Desktop: 
 **Different views from the desktop.**  
 
@@ -109,3 +111,15 @@ Real Estate uses the following open source projects for proper operation:
 :point_right: *Removal of premises after deleting photos.* :point_down:
 
 ![desktop20](https://user-images.githubusercontent.com/5839775/62244623-194c7c80-b3e0-11e9-8538-46212f549fc3.jpg)
+
+:point_right: *Pre-edit view and view of the premises selected for editing.* :point_down:
+
+![desktop21](https://user-images.githubusercontent.com/5839775/65336611-fca21900-dbc6-11e9-9967-5054d6fd270e.jpg)
+
+:point_right: *Information about the premises on the left. On the right view of the editing window.* :point_down:
+
+![desktop22](https://user-images.githubusercontent.com/5839775/65336655-12afd980-dbc7-11e9-969c-5ef0ba8ae8b0.jpg)
+
+:point_right: *Editing the "Rented" field and after-editing premises view.* :point_down:
+
+![desktop23](https://user-images.githubusercontent.com/5839775/65336675-17748d80-dbc7-11e9-9fad-d9c137592ca1.jpg)
