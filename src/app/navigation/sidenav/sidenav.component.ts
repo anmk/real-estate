@@ -19,7 +19,7 @@ export class SidenavComponent extends HeaderComponent {
     super(router, authService);
   }
 
-  private onCloseSidenav(): void {
+  onCloseSidenav(): void {
     this.closeSidenav.emit();
   }
 
