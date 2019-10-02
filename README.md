@@ -1,11 +1,8 @@
 This project uses [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
 # Real estate
 The application is available at the following addresses:
-
-https://ng-real-estate.web.app
-
-https://ng-real-estate.firebaseapp.com
-
+* https://ng-real-estate.web.app
+* https://ng-real-estate.firebaseapp.com
 ## Introduction
 The application is built for the real estate sector. Current functionalities include browsing premises for rent and adding new premises with photos. The application is in the version for many resolutions.
 ## Development server
