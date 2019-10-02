@@ -11,12 +11,11 @@ import { User } from './user-data.model';
 export class UserService {
   fbUser: firebase.User;
   appUser: User = this.fbUser;
-  appBaseUrl = 'http://localhost:4200';
+  appBaseUrl = location.origin;
   userDoc: AngularFirestoreDocument<User>;
 
   constructor(private afs: AngularFirestore,
-              private matSnackBarToast: MatSnackBar
-              ) { }
+              private matSnackBarToast: MatSnackBar) { }
 
   getUser(userId: string) {
     this.userDoc = this.afs.doc<User>(`users/${userId}`);
