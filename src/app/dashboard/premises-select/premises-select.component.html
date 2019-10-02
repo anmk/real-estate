@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <form #formRef="ngForm" (ngSubmit)="sharePremisesId(formRef.value)">
+  <form #formRef="ngForm" (ngSubmit)="sharePremisesId()">
     <div *ngFor="let premise of premises$ | async" class="photo-container">
       <ng-container>
         <div *ngIf="premise.userId===user.uid" class="container-element city-element"> 
