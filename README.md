@@ -1,4 +1,4 @@
-This project uses [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
+This project uses [Angular](https://github.com/angular/angular) version 8.1.0 and [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0.
 # Real estate
 The application is available at the following addresses:
 * https://ng-real-estate.web.app
