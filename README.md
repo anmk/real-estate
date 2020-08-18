@@ -11,10 +11,11 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 ## Tech
 Real Estate uses the following open source projects for proper operation:
+* [Angular](https://github.com/angular/angular)
 * [Angular CLI](https://github.com/angular/angular-cli)
 * [Angular Material](https://material.angular.io)
 * [Angular Flex-layout](https://github.com/angular/flex-layout)
-* [Angular Fire](https://github.com/angular/flex-layout)
+* [Angular Fire](https://github.com/angular/angularfire)
 * [TypeScript](https://github.com/microsoft/TypeScript)
 * [node.js](https://nodejs.org/en/)
 * [RxJS](https://github.com/ReactiveX/rxjs)
